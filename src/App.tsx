@@ -1,24 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import LoginScreen from "./components/LoginScreen";
+import UserInfo from "./components/UserInfo";
+import WelcomeScreen from "./components/WelconeInfo";
 
 function App() {
+  const [isLogged, setIsLogged] = useState(true);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {!isLogged && (
+        <div className="container">
+          <div className="center">
+            <text id="filmappka" className="center">
+              FILMAPPKA
+            </text>
+          </div>
+          <div className="midPart">
+            <WelcomeScreen />
+            <LoginScreen />
+          </div>
+          <div className="left">
+            <text id="footer"> Projekt interfejsy człowiek-komputer</text>
+          </div>
+        </div>
+      )}
+      {isLogged && (
+        <div className="userContainer">
+          <UserInfo />
+        </div>
+      )}
     </div>
   );
 }
