@@ -87,7 +87,9 @@ body {
 
 .title {
   font-size: 2rem;
-  margin: 0;
+  margin: -6.3rem;  
+  margin-bottom: 2rem;
+  color: white;
 }
 
 .progress-bar {

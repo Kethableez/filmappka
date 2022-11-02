@@ -103,3 +103,19 @@ font-size: small;
   padding: 2%;
 
 }
+.movieTitle{
+  font-size: xx-large;
+  font-weight: 700;
+  margin-bottom: 2%;
+}
+.movieRating{
+  font-size: xx-large;
+  font-weight: 500;
+  margin-bottom: 2%;
+}
+.MovieDescription{
+  font-size: large;
+  font-weight: 300;
+  line-height: 120%;
+
+}
