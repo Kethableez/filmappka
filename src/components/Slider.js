@@ -43,6 +43,7 @@ document.addEventListener("click", e => {
   }
   
   function onHandleClick(handle) {
+    throttleProgressBar()
     const progressBar = handle.closest(".row").querySelector(".progress-bar")
     const slider = handle.closest(".container1").querySelector(".slider")
     const sliderIndex = parseInt(
