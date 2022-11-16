@@ -4,7 +4,7 @@ import FilmSlider from "./FilmSlider";
 interface UserInfoProps {}
 
 const UserInfo: React.FC<UserInfoProps> = ({}) => {
-  const [Confirmed, isConfirmed] = useState(true);
+  const [Confirmed, isConfirmed] = useState(false);
   return (
     <>
       {!Confirmed && (
