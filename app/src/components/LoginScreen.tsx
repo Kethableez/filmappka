@@ -1,4 +1,5 @@
 import React from "react";
+import { WebcamCapture } from "./VideoPlayer";
 
 interface LoginScreenProps {}
 
@@ -8,7 +9,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({}) => {
       <image></image>
       <div className="camera">
         <text className="title">Welcome, make photo to unlock a resources</text>
-        <text className="content">
+        {/* <text className="content">
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry's standard dummy text ever
           since the 1500s, when an unknown printer took a galley of type and
@@ -18,7 +19,8 @@ const LoginScreen: React.FC<LoginScreenProps> = ({}) => {
           the release of Letraset sheets containing Lorem Ipsum passages, and
           more recently with desktop publishing software like Aldus PageMaker
           including versions of Lorem Ipsum.
-        </text>
+        </text> */}
+        <WebcamCapture />
       </div>
     </>
   );

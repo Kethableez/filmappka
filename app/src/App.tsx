@@ -5,7 +5,7 @@ import UserInfo from "./components/UserInfo";
 import WelcomeScreen from "./components/WelconeInfo";
 
 function App() {
-  const [isLogged, setIsLogged] = useState(true);
+  const [isLogged, setIsLogged] = useState(false);
   return (
     <div>
       {!isLogged && (
