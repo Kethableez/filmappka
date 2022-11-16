@@ -7,7 +7,6 @@ const videoConstraints = {
   height: 720,
   facingMode: "user",
 };
-
 export const WebcamCapture = () => {
   const [imgSrc, setImgSrc] = useState(null);
   const webcamRef = React.useRef<any>();
