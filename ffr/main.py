@@ -13,9 +13,9 @@ def initCollection():
   coll = mongo.Collection(conn, COLL_NAME)
   return coll
 
+collection = initCollection()
 args = Parser().parse()
 
-collection = initCollection()
 
 file, mode, label = args.file, args.mode, args.label
 
