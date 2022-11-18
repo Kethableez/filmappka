@@ -4,7 +4,7 @@ from faceapi.faceRecognition import recogniseFace
 from utils.argParser import Parser
 from utils.bufferCollector import collectBuffer
 
-URI = 'mongodb://localhost:27017'
+URI = 'mongodb://ffr-db:27000'
 DB_NAME = 'ffr'
 COLL_NAME = 'encodings'
 
