@@ -29,6 +29,6 @@ def recogniseFace(buff, coll: mongo.Collection):
       n = Counter([name for name, vote in list(zip(data['names'], votes)) if vote == True]).most_common()[0][0]
       names.append(n)
   if len(names) == 0:
-    return { 'results': 'NONE' }
+    raise Exception('[FFR - REC] No face were recognised')
   else:
     return { 'results': names }
