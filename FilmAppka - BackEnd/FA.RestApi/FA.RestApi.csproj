@@ -23,14 +23,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PT.DataAccess\FA.DataAccess.csproj" />
-    <ProjectReference Include="..\PT.Domain\FA.Domain.csproj" />
-    <ProjectReference Include="..\PT.Services\FA.Services.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
+    <ProjectReference Include="..\FA.Services\FA.Services.csproj" />
+    <ProjectReference Include="..\FA.DataAccess\FA.DataAccess.csproj" />
+    <ProjectReference Include="..\FA.Domain\FA.Domain.csproj" />
+    <ProjectReference Include="..\FA.Services\FA.Services.csproj" />
   </ItemGroup>
 
 
