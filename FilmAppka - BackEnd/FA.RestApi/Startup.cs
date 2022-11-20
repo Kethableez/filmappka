@@ -167,21 +167,21 @@ namespace FA.RestApi
                 routeBuilder.EnableDependencyInjection();
                 routeBuilder.Expand().Select().Filter().Count().OrderBy();
             });
-            app.Map("", terminalApp =>
-            {
-                terminalApp.UseSpa(spa =>
-                {
-                    spa.Options.SourcePath = "wwwroot";
-                    spa.Options.DefaultPageStaticFileOptions = new StaticFileOptions
-                    {
-                        FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(),"wwwroot"))
-                    };
-                    if(env.IsDevelopment())
-                    {
-                        spa.UseProxyToSpaDevelopmentServer("http://localhost:60653");
-                    }
-                });
-            });
+            //app.Map("", terminalApp =>
+            //{
+            //    terminalApp.UseSpa(spa =>
+            //    {
+            //        spa.Options.SourcePath = "wwwroot";
+            //        spa.Options.DefaultPageStaticFileOptions = new StaticFileOptions
+            //        {
+            //            FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(),"wwwroot"))
+            //        };
+            //        if(env.IsDevelopment())
+            //        {
+            //            spa.UseProxyToSpaDevelopmentServer("http://localhost:60653");
+            //        }
+            //    });
+            //});
         }
     }
 }
