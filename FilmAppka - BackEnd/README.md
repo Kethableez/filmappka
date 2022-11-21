@@ -15,7 +15,7 @@ W celu uruchomienia aplikacji nale¿y:
 * Wybraæ FA.RestApi jako projekt startowy
 * Uruchomiæ
 
----
+```
 
 ### Zmiany Punkt Kontrolny 1
 #### Utworzenie Infrastruktury:
@@ -27,7 +27,7 @@ W celu uruchomienia aplikacji nale¿y:
 #### Przygotowanie RestApi - Prace w FA.RestApi
 #### Utworzenie bazy danych
 
----
+```
 
 ### Zmiany Punkt Kontrolny 2
 #### Utworzenie pustych kontrolerów w celu przygotowania integracji z FrontEndem
