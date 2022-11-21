@@ -24,6 +24,8 @@ using Microsoft.AspNet.OData.Formatter;
 using Microsoft.AspNet.OData.Extensions;
 using AutoMapper;
 using Microsoft.Extensions.FileProviders;
+using FA.Services.User;
+using FA.Services.Type;
 
 namespace FA.RestApi
 {
@@ -76,6 +78,9 @@ namespace FA.RestApi
                 return x.GetService<FADbContext>();
             });
             services.AddMemoryCache();
+
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ITypeService, TypeService>();
 
             services.AddCors(builder => builder.AddPolicy("CorsPolicy",
                 builder => builder.AllowAnyOrigin()
