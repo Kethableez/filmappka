@@ -1,4 +1,5 @@
 ﻿using FA.Services.Models;
+using FA.Services.User;
 using Microsoft.AspNet.OData.Query;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -16,24 +17,24 @@ namespace FA.RestApi.Controllers
     public class UserController : ControllerBase
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
-        public UserController()
+        private readonly IUserService userService;
+        public UserController(IUserService _userService)
         {
+            userService = _userService;
         }
 
         [HttpGet("getUser")]
         public UserInfo getUser(int userId)  //albo UserName 
         {
-
-            return new UserInfo();
-            //try
-            //{
-            //    return userService.getShelter(shelterId);
-            //}
-            //catch (Exception ex)
-            //{
-            //    logger.Error(ex);
-            //    throw new Exception("", ex);
-            //}
+            try
+            {
+                return userService.getUser(userId);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                throw new Exception("", ex);
+            }
         }
     }
 }

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace FA.Domain.Entities.Enums
+namespace FA.Domain.Entities
 {
     public class MovieTypesEnum : EnumEntity
     {
