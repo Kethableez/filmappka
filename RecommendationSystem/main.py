@@ -136,7 +136,7 @@ for feature in features:
 
 
 def create_soup(x):
-    return ' '.join(x['keywords']) + ' ' + ' '.join(x['cast']) + ' ' + x['director'] + ' ' + ' '.join(x['genres']) + ' ' + ' '.join(x['genres'])
+    return ' '.join(x['keywords']) + ' ' + ' '.join(x['cast']) + ' ' + x['director'] + ' ' + ' '.join(x['genres'])
 
 
 df2['soup'] = df2.apply(create_soup, axis=1)
@@ -148,9 +148,11 @@ cosine_sim2 = cosine_similarity(count_matrix, count_matrix)
 df2 = df2.reset_index()
 indices = pd.Series(df2.index, index=df2['title'])
 
-
-# mood in ['angry', 'disgust', 'fear', 'happy', 'sad', 'surprise', 'neutral']
-mood = 'happy'
+# %%
+mood = input("What is your current mood?(angry, disgust, fear, happy, sad, surprise, neutral): ")
+while mood not in ['angry', 'disgust', 'fear', 'happy', 'sad', 'surprise', 'neutral']:
+    mood = input("What is your current mood?(angry, disgust, fear, happy, sad, surprise, neutral): ")
+print("Your mood is: ", mood)
 # %%
 if mood == 'angry':
     recommendations = get_recommendations('American Psycho', cosine_sim2)
@@ -163,6 +165,6 @@ if mood == 'happy':
 if mood == 'sad':
     recommendations = get_recommendations('The Perks of Being a Wallflower', cosine_sim2)
 if mood == 'surprise':
-    recommendations = get_recommendations('The Wizard of Oz', cosine_sim2)
+    get_recommendations('The Wizard of Oz', cosine_sim2)
 if mood == 'neutral':
     recommendations = pop['title'].head(10)
