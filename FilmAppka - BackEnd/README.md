@@ -30,4 +30,6 @@ W celu uruchomienia aplikacji nale¿y:
 ```
 
 ### Zmiany Punkt Kontrolny 2
-#### Utworzenie pustych kontrolerów w celu przygotowania integracji z FrontEndem
+#### Utworzenie pustych kontrolerów w celu przygotowania integracji z FrontEndem - FA.RestApi/Controllers
+#### Przygotowanie Dependency Injection 
+#### Wystawienie pliku swagger
