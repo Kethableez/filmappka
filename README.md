@@ -20,7 +20,7 @@ In order to run the main logic file, you need to install the following packages 
 
 ## Algorithm
 
-# Demographic Filtering
+### Demographic Filtering
 
 We need a metric to score or rate movie, calculate the score for every movie and sort the scores and recommend the best rated movie to the users.
 
@@ -30,13 +30,13 @@ We use the average ratings of the movie as the score but using this won't be fai
 
 where,
 
-v is the number of votes for the movie;
-m is the minimum votes required to be listed in the chart;
-R is the average rating of the movie;
-C is the mean vote across the whole report.
+- v is the number of votes for the movie;
+- m is the minimum votes required to be listed in the chart;
+- R is the average rating of the movie;
+- C is the mean vote across the whole report.
 
 
-# Content Based Filtering
+### Content Based Filtering
 
 **Plot description based Recommender**
 
