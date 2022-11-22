@@ -16,3 +16,29 @@ In order to run the main logic file, you need to install the following packages 
 - from ast import literal_eval
 - from sklearn.feature_extraction.text import TfidfVectorizer
 - from sklearn.metrics.pairwise import linear_kernel
+
+## Methods
+
+```
+def weighted_rating(x: {__getitem__},
+                    m: float | Series | None = m,
+                    C: Any = C) -> float
+ 
+ 
+def get_recommendations(title: Any,
+                        cosine_sim: {__getitem__} = cosine_sim) -> Any
+ 
+ 
+def get_director(x: {__iter__}) -> Any
+ 
+ 
+def get_list(x: Any) -> list
+ 
+ 
+def clean_data(x: Any) -> list[str] | str
+
+
+def create_soup(x: {__getitem__}) -> str
+ 
+ 
+```
