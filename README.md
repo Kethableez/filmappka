@@ -1,4 +1,8 @@
-Movie Recommendation System
+# Movie Recommendation System
+
+Based on the given mood algorithm returns a list of 10 recommended movies to watch.
+
+## Installation
 
 Firstly, download and unpack the test data sets:
 - tmdb_5000_credits
