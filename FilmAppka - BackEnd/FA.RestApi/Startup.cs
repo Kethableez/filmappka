@@ -24,6 +24,8 @@ using Microsoft.AspNet.OData.Formatter;
 using Microsoft.AspNet.OData.Extensions;
 using AutoMapper;
 using Microsoft.Extensions.FileProviders;
+using FA.Services.User;
+using FA.Services.Type;
 
 namespace FA.RestApi
 {
@@ -76,6 +78,9 @@ namespace FA.RestApi
                 return x.GetService<FADbContext>();
             });
             services.AddMemoryCache();
+
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ITypeService, TypeService>();
 
             services.AddCors(builder => builder.AddPolicy("CorsPolicy",
                 builder => builder.AllowAnyOrigin()
@@ -167,21 +172,21 @@ namespace FA.RestApi
                 routeBuilder.EnableDependencyInjection();
                 routeBuilder.Expand().Select().Filter().Count().OrderBy();
             });
-            app.Map("", terminalApp =>
-            {
-                terminalApp.UseSpa(spa =>
-                {
-                    spa.Options.SourcePath = "wwwroot";
-                    spa.Options.DefaultPageStaticFileOptions = new StaticFileOptions
-                    {
-                        FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(),"wwwroot"))
-                    };
-                    if(env.IsDevelopment())
-                    {
-                        spa.UseProxyToSpaDevelopmentServer("http://localhost:60653");
-                    }
-                });
-            });
+            //app.Map("", terminalApp =>
+            //{
+            //    terminalApp.UseSpa(spa =>
+            //    {
+            //        spa.Options.SourcePath = "wwwroot";
+            //        spa.Options.DefaultPageStaticFileOptions = new StaticFileOptions
+            //        {
+            //            FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(),"wwwroot"))
+            //        };
+            //        if(env.IsDevelopment())
+            //        {
+            //            spa.UseProxyToSpaDevelopmentServer("http://localhost:60653");
+            //        }
+            //    });
+            //});
         }
     }
 }

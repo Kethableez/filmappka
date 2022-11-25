@@ -1,0 +1,11 @@
+numpy
+flask
+flask-restful
+flask_cors
+gunicorn
+pymongo
+opencv-python
+cmake
+dlib==19.22
+face_recognition
+deepface

@@ -1,0 +1,6 @@
+__pycache__
+dlib_venv
+data
+test
+weights/*.h5
+weights/*.rar

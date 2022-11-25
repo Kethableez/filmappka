@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PT.DataAccess\FA.DataAccess.csproj" />
+    <ProjectReference Include="..\FA.DataAccess\FA.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>
