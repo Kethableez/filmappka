@@ -136,7 +136,7 @@ const FilmSlider: React.FC<FilmSliderProps> = ({}) => {
         "In Steven Spielberg's massive blockbuster, paleontologists Alan Grant (Sam Neill) and Ellie Sattler (Laura Dern) and mathematician Ian Malcolm (Jeff Goldblum) are among a select group chosen to tour an island theme park populated by dinosaurs created from prehistoric DNA. While the park's mastermind, billionaire John Hammond (Richard Attenborough), assures everyone that the facility is safe, they find out otherwise when various ferocious predators break free and go on the hunt.",
     },
   ];
-
+  const back = React.useCallback(() => {}, []);
   const [selectedMovieIndex, setSelectedMovieIndex] = useState<
     number | undefined
   >();
@@ -199,6 +199,9 @@ const FilmSlider: React.FC<FilmSliderProps> = ({}) => {
             movies[selectedMovieIndex].description}
         </text>
       </div>
+      <button>
+        <text onClick={back}>wróć</text>
+      </button>
     </html>
   );
 };
