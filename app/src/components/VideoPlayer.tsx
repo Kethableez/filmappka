@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Webcam from "react-webcam";
 
+export let dupa = null;
 const WebcamComponent = () => <Webcam />;
 const videoConstraints = {
   width: 1280,
@@ -25,7 +26,7 @@ export const WebcamCapture = () => {
         videoConstraints={videoConstraints}
       />
       <button onClick={capture}>Capture photo</button>
-      {imgSrc && <img src={imgSrc} />}
+      {/* {imgSrc && <img src={imgSrc} />} */}
     </>
   );
 };
