@@ -1,19 +1,14 @@
 import React, { useState } from "react";
 
-interface UserInfoProps {
-  open: boolean;
-}
+interface UserInfoProps {}
 
-const UserInfo: React.FC<UserInfoProps> = ({ open }) => {
-  const [Confirmed, isConfirmed] = useState(open);
+const UserInfo: React.FC<UserInfoProps> = () => {
   const userPhoto =
     "https://st3.depositphotos.com/6672868/13701/v/600/depositphotos_137014128-stock-illustration-user-profile-icon.jpg";
   const name = "M4gn3tic";
   const mood = "szczesliwy";
-  const confirm = React.useCallback(() => {
-    isConfirmed(true);
-  }, [isConfirmed]);
-  const back = React.useCallback(() => {}, [isConfirmed]);
+  const confirm = React.useCallback(() => {}, []);
+  const back = React.useCallback(() => {}, []);
   return (
     <>
       <div className="UserInfo">
@@ -33,8 +28,6 @@ const UserInfo: React.FC<UserInfoProps> = ({ open }) => {
           </button>
         </div>
       </div>
-
-      {Confirmed && <></>}
     </>
   );
 };

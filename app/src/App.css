@@ -89,7 +89,7 @@ font-size: small;
 .title{
   display: flex;
   align-items: flex-start;
-  margin-top: -30%;
+
   line-height: 40px;
   color: black;
   padding: 3%
@@ -130,4 +130,72 @@ font-size: small;
 display: flex;
 flex-direction: row;
 
+}
+.form{
+  background-color: rgb(151, 132, 108);;
+  border-radius: 5px;
+  width: 80%;
+  margin: 20px ;
+  padding: 20px;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.loginForm{
+  background-color: bisque;
+  color:#000;  
+  border-radius: 5px;
+  width: 80%;
+  margin: 20px ;
+  padding: 20px;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.form-body{
+
+  padding: 20px 10px;
+  width: 80%;
+  height: 80%;
+}
+
+.form-body > *{
+  padding: 5px;
+
+}
+
+.form__label{
+  width: 40%;
+}
+
+.form_input{
+  width: 60%;
+}
+
+.footer{
+  text-align: center;
+}
+
+.formMargin{
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.BTNmargin{
+  padding: 1%;
+  margin: 10px;
+}
+Link{
+  color: #000;
+  text-decoration: none;
+}
+.padding{
+  padding: 2%;
 }
