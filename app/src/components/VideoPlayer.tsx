@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Webcam from "react-webcam";
+import { Link } from "react-router-dom";
 
 export let dupa = null;
 const WebcamComponent = () => <Webcam />;
@@ -19,14 +20,23 @@ export const WebcamCapture = () => {
     <>
       <Webcam
         audio={false}
-        height={520}
+        height={400}
         ref={webcamRef}
         screenshotFormat="image/jpeg"
-        width={600}
+        width={400}
         videoConstraints={videoConstraints}
       />
-      <button onClick={capture}>Capture photo</button>
-      {/* {imgSrc && <img src={imgSrc} />} */}
+      <div className="row padding">
+        <button onClick={capture}>Capture photo</button>
+        <button>
+          <Link to="/">Back</Link>
+        </button>
+        <button>
+          <Link to="/films">Filmy</Link>
+        </button>
+      </div>
+
+      {imgSrc && <img src={imgSrc} />}
     </>
   );
 };

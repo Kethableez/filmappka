@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { isTemplateExpression } from "typescript";
+import { Link } from "react-router-dom";
 import "./FilmSlider.css";
 
 import "./Slider.js";
@@ -17,7 +18,8 @@ const FilmSlider: React.FC<FilmSliderProps> = ({}) => {
   const movies: Movie[] = [
     {
       id: 0,
-      image: "https://i.postimg.cc/cJgKvhQ7/joker.jpg",
+      image:
+        "https://pyxis.nymag.com/v1/imgs/0a8/5d1/3139b0b2fc427ff34fe5394bd1625d8527-2019-critics-joker.rsquare.w700.jpg",
       title: "Joker",
       rating: 4.5,
       description:
@@ -200,7 +202,14 @@ const FilmSlider: React.FC<FilmSliderProps> = ({}) => {
         </text>
       </div>
       <button>
-        <text onClick={back}>wróć</text>
+        <text onClick={back}>
+          <button>
+            <Link to="/"> Home </Link>
+          </button>
+          <button>
+            <Link to="/mood"> Back </Link>
+          </button>
+        </text>
       </button>
     </html>
   );
