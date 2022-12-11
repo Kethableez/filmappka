@@ -16,6 +16,9 @@ namespace FA.Domain.Entities
 
         public string LastName { get; set; }
 
+        public string PasswordHash { get; set; }
+
+
         public ICollection<MovieTypesEnum> LikedMovieTypes { get; set; }
 
         public ICollection<MovieTypesEnum> HatedMovieTypes { get; set; }

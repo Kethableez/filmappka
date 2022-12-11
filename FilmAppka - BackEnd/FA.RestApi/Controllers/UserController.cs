@@ -36,5 +36,16 @@ namespace FA.RestApi.Controllers
                 throw new Exception("", ex);
             }
         }
+        //[HttpPost]
+        //public UserInfo loginUser(string username, string passwaord)
+        //{
+
+        //}
+
+        [HttpPost]
+        public void createUser(UserInfo user)
+        {
+
+        }
     }
 }

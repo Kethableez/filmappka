@@ -13,9 +13,10 @@ namespace FA.Services.User
     {
         private readonly FADbContext faDbContext;
         private readonly Mapper mapper;
-        public UserService(FADbContext _faDbContext)
+        public UserService(FADbContext _faDbContext, Mapper _mapper)
         {
             faDbContext = _faDbContext;
+            mapper = _mapper;
         }
         public UserInfo getUser(int userId)
         {
