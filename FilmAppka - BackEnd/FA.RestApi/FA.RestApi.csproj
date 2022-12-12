@@ -29,5 +29,7 @@
     <ProjectReference Include="..\FA.Services\FA.Services.csproj" />
   </ItemGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties swagger_4swagger_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+
 
 </Project>

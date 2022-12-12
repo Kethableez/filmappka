@@ -1,5 +1,4 @@
 ﻿using FA.Domain.Entities;
-using FA.Domain.Entities.Enums;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;

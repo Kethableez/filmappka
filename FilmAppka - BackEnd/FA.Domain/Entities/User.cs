@@ -1,5 +1,5 @@
 ﻿using FA.Domain.Entities.Abstract;
-using FA.Domain.Entities.Enums;
+using FA.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -15,6 +15,9 @@ namespace FA.Domain.Entities
         public string Email { get; set; }
 
         public string LastName { get; set; }
+
+        public string PasswordHash { get; set; }
+
 
         public ICollection<MovieTypesEnum> LikedMovieTypes { get; set; }
 

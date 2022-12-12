@@ -15,6 +15,7 @@ namespace FA.DataAccess.EntityConfiguration
             Property(x => x.UserName).IsRequired();
             Property(x => x.Email).IsRequired();
             Property(x => x.LastName).IsRequired();
+            Property(x => x.PasswordHash).IsRequired();
             HasMany(x => x.WatchedMovies).WithMany(x => x.WatchedByUser);
             HasMany(x => x.LikedMovieTypes).WithMany(x => x.LikedByUser);
             HasMany(x => x.HatedMovieTypes).WithMany(x => x.HatedByUser);

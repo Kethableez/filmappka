@@ -1,5 +1,5 @@
 ﻿using FA.Domain.Entities.Abstract;
-using FA.Domain.Entities.Enums;
+using FA.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;

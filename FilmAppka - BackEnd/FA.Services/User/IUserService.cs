@@ -7,6 +7,6 @@ namespace FA.Services.User
 {
     public interface IUserService
     {
-        public UserInfo getUser(int userId);
+        public UserInfo getUser(string username);
     }
 }

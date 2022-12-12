@@ -24,11 +24,25 @@ namespace FA.RestApi.Controllers
         }
 
         [HttpGet("getUser")]
-        public UserInfo getUser(int userId)  //albo UserName 
+        public UserInfo getUser(string username)
         {
             try
             {
-                return userService.getUser(userId);
+                return userService.getUser(username);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                throw new Exception("", ex);
+            }
+        }
+
+        [HttpGet("crateUser")]
+        public void createUser(string username)
+        {
+            try
+            {
+
             }
             catch (Exception ex)
             {
