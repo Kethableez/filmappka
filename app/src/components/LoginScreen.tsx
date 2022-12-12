@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { FaEyeSlash, FaEye } from "react-icons/fa";
+import { WebcamCapture } from "./VideoPlayer";
 function RegistrationForm() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -44,35 +45,11 @@ function RegistrationForm() {
   return (
     <div className="loginForm">
       <div className="form-body">
-        <div className="email formMargin">
-          <label className="form__label" htmlFor="email">
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            className="form__input"
-            value={email}
-            onChange={(e) => handleInputChange(e)}
-            placeholder="Email"
-          />
-        </div>
-        <div className="password formMargin">
-          <label className="form__label" htmlFor="password">
-            Password
-          </label>
-          <input
-            className="form__input"
-            type={passwordShown ? "text" : "password"}
-            id="password"
-            value={password}
-            onChange={(e) => handleInputChange(e)}
-            placeholder="Password"
-          />
-          <button onClick={togglePassword}>
-            {passwordShown ? <FaEyeSlash /> : <FaEye />}
-          </button>
-        </div>
+      <text className="title">
+          Make a photo to log in, or go to register if you are here first time 
+        </text>
+<WebcamCapture />
+      
       </div>
       <div className="footer formMargin">
         <button
@@ -85,9 +62,7 @@ function RegistrationForm() {
         <button>
           <Link to="/register">Register</Link>
         </button>
-        <button>
-          <Link to="/mood">Make a photo</Link>
-        </button>
+       
       </div>
     </div>
   );
