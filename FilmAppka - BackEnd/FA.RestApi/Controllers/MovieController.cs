@@ -1,4 +1,5 @@
 ﻿using FA.Services.Models;
+using FA.Services.Movie;
 using Microsoft.AspNet.OData.Query;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -16,45 +17,64 @@ namespace FA.RestApi.Controllers
     public class MovieController : ControllerBase
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
-        public MovieController()
+        private readonly IMovieService movieService;
+        public MovieController(IMovieService _movieService)
         {
+            movieService = _movieService;
         }
 
         [HttpGet("getAllMovies")]
         public List<MovieInfo> getAllMovies()
         {
-
-            return new List<MovieInfo>();
-            //try
-            //{
-            //    return userService.getShelter(shelterId);
-            //}
-            //catch (Exception ex)
-            //{
-            //    logger.Error(ex);
-            //    throw new Exception("", ex);
-            //}
+            try
+            {
+                return movieService.getAllMovies();
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                throw new Exception("", ex);
+            }
         }
 
         [HttpGet("getWatchedMoviesForUser")]
         public List<MovieInfo> getWatchedMoviesForUser(int userId)
         {
-            return new List<MovieInfo>();
+            try
+            {
+                return movieService.getWatchedMoviesForUser(userId);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                throw new Exception("", ex);
+            }
         }
         [HttpPatch("addMovieAsWatched")]
         public void addMovieAsWatched(int userId,int movieId)
         {
-
+            try
+            {
+                movieService.addMovieAsWatched(userId, movieId);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                throw new Exception("", ex);
+            }
         }
         [HttpDelete("removeMovieFromWatched")]
         public void removeMovieFromWatched(int userId, int movieId)
         {
-
-        }
-        [HttpGet("getMovieSugestions")]
-        public List<MovieInfo> getMovieSugestions(int userId, string mood)
-        {
-            return new List<MovieInfo>();
+            try
+            {
+                movieService.removeMovieFromWatched(userId, movieId);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                throw new Exception("", ex);
+            }
         }
     }
 }

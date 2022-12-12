@@ -24,11 +24,11 @@ namespace FA.RestApi.Controllers
         }
 
         [HttpGet("getUser")]
-        public UserInfo getUser(int userId)  //albo UserName 
+        public UserInfo getUser(string username)
         {
             try
             {
-                return userService.getUser(userId);
+                return userService.getUser(username);
             }
             catch (Exception ex)
             {
@@ -36,16 +36,19 @@ namespace FA.RestApi.Controllers
                 throw new Exception("", ex);
             }
         }
-        //[HttpPost]
-        //public UserInfo loginUser(string username, string passwaord)
-        //{
 
-        //}
-
-        [HttpPost]
-        public void createUser(UserInfo user)
+        [HttpGet("crateUser")]
+        public void createUser(string username)
         {
+            try
+            {
 
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                throw new Exception("", ex);
+            }
         }
     }
 }

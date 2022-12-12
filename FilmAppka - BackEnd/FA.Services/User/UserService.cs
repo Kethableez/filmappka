@@ -18,9 +18,9 @@ namespace FA.Services.User
             faDbContext = _faDbContext;
             mapper = _mapper;
         }
-        public UserInfo getUser(int userId)
+        public UserInfo getUser(string username)
         {
-            var dbUser = faDbContext.Set<Domain.Entities.User>().Where(x => x.Id == userId).FirstOrDefault();
+            var dbUser = faDbContext.Set<Domain.Entities.User>().Where(x => x.UserName == username).FirstOrDefault();
             var user = new UserInfo();
             mapper.Map(dbUser, user); ;
             return user;

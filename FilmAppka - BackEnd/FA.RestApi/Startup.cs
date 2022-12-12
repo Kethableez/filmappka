@@ -26,6 +26,7 @@ using AutoMapper;
 using Microsoft.Extensions.FileProviders;
 using FA.Services.User;
 using FA.Services.Type;
+using FA.Services.Movie;
 
 namespace FA.RestApi
 {
@@ -81,6 +82,7 @@ namespace FA.RestApi
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ITypeService, TypeService>();
+            services.AddScoped<IMovieService, MovieService>();
 
             services.AddCors(builder => builder.AddPolicy("CorsPolicy",
                 builder => builder.AllowAnyOrigin()
