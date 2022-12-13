@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "./FilmSlider.css";
 
 import "./Slider.js";
+import { FaEyeSlash, FaEye } from "react-icons/fa";
 
 interface FilmSliderProps {}
 
@@ -142,7 +143,10 @@ const FilmSlider: React.FC<FilmSliderProps> = ({}) => {
   const [selectedMovieIndex, setSelectedMovieIndex] = useState<
     number | undefined
   >();
-
+  const [isMovieWatched, setIsMovieWatched] = useState(false);
+  const togglePassword = () => {
+    setIsMovieWatched(!isMovieWatched);
+  };
   const handleMovieImageClick = (index: number) => () =>
     setSelectedMovieIndex(index);
 
@@ -186,14 +190,16 @@ const FilmSlider: React.FC<FilmSliderProps> = ({}) => {
             selectedMovieIndex &&
             movies[selectedMovieIndex].title}
         </text>
-
+            
         <text className="movieRating">
           {!selectedMovieIndex && movies[0].rating + "/ 5"}
           {selectedMovieIndex != 0 &&
             selectedMovieIndex &&
             movies[selectedMovieIndex].rating + "/ 5"}
         </text>
-
+        <button className="short" onClick={togglePassword}>
+            {isMovieWatched ?  <FaEye /> :<FaEyeSlash /> }
+          </button>
         <text className="MovieDescription">
           {!selectedMovieIndex && movies[0].description}
           {selectedMovieIndex != 0 &&

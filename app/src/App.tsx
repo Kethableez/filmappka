@@ -27,10 +27,10 @@ function App() {
               <Route path="/register">
                 <RegistrationForm />
               </Route>
-              <Route path="/mood">
+              {/* <Route path="/mood">
                 <WelcomeScreen />
                 <MoodScreen />
-              </Route>
+              </Route> */}
               <Route path="/films">
                 <div className="movies">
                   <FilmSlider />

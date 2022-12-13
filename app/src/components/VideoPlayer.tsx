@@ -18,25 +18,26 @@ export const WebcamCapture = () => {
   }, [webcamRef, setImgSrc]);
   return (
     <>
-      <Webcam
+    <div className="photosM phoM"> 
+    <Webcam
+    
         audio={false}
-        height={400}
+        height={900}
         ref={webcamRef}
         screenshotFormat="image/jpeg"
-        width={400}
+        width={900}
         videoConstraints={videoConstraints}
       />
+      {imgSrc && <img  src={imgSrc} />}
+      </div>
+     
       <div className="row padding">
         <button onClick={capture}>Capture photo</button>
-        <button>
-          <Link to="/">Back</Link>
-        </button>
-        <button>
-          <Link to="/films">Filmy</Link>
-        </button>
+       
+        
       </div>
 
-      {imgSrc && <img src={imgSrc} />}
+      
     </>
   );
 };

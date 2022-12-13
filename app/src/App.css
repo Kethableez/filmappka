@@ -5,8 +5,11 @@
   display: flex;
   background-color: cadetblue;
   color: white;
+  justify-content: center;
+  justify-self: center;
   flex-direction: column;
-  height: 100vh;
+  height: auto ;
+ scroll-snap-type: none;
   padding: 5%;
 
 }
@@ -14,7 +17,7 @@
   display: flex;
   background-color: cadetblue;
   color: white;
-  height: 100%;
+  height: auto;
   width: 100%;
   padding: 5%;
   
@@ -137,7 +140,7 @@ flex-direction: row;
   width: 80%;
   margin: 20px ;
   padding: 20px;
-  height: 80%;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -157,37 +160,6 @@ flex-direction: row;
   align-items: center;
 }
 
-
-.form-body{
-
-  padding: 20px 10px;
-  width: 80%;
-  height: 80%;
-}
-
-.form-body > *{
-  padding: 5px;
-
-}
-
-.form__label{
-  width: 40%;
-}
-
-.form_input{
-  width: 60%;
-}
-
-.footer{
-  text-align: center;
-}
-
-.formMargin{
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 .BTNmargin{
   padding: 1%;
   margin: 10px;
@@ -199,3 +171,18 @@ Link{
 .padding{
   padding: 2%;
 }
+ .photoRegister{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+ 
+ }
+ .photosM{
+  margin-left: 20%;
+  margin-top: -10%;
+ }
+.phoM{margin-left: 0%;
+  margin-top: -10%;}
+  .short{
+    width: 100px;
+  }
