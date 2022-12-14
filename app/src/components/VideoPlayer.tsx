@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Webcam from "react-webcam";
 import { Link } from "react-router-dom";
 
-export let dupa = null;
+
 const WebcamComponent = () => <Webcam />;
 const videoConstraints = {
   width: 1280,
@@ -13,7 +13,7 @@ export const WebcamCapture = () => {
   const [imgSrc, setImgSrc] = useState(null);
   const webcamRef = React.useRef<any>();
   const capture = React.useCallback(() => {
-    const imageSrc = webcamRef.current.getScreenshot();
+  const imageSrc = webcamRef.current.getScreenshot();
     setImgSrc(imageSrc);
   }, [webcamRef, setImgSrc]);
   return (

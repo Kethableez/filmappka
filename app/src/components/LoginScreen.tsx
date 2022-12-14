@@ -3,26 +3,52 @@ import { Link } from "react-router-dom";
 
 import { FaEyeSlash, FaEye } from "react-icons/fa";
 import { WebcamCapture } from "./VideoPlayer";
+import Webcam from "react-webcam";
 function RegistrationForm() {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [username, setUsername] = useState();
+  
 
-  const [passwordShown, setPasswordShown] = useState(false);
+  
 
-  const togglePassword = () => {
-    setPasswordShown(!passwordShown);
+  
+  const videoConstraints = {
+    width: 1280,
+    height: 720,
+    facingMode: "user",
   };
+  const [imgSrc, setImgSrc] = useState(null);
+  const webcamRef = React.useRef<any>();
+  const capture = React.useCallback(() => {
+  const imageSrc = webcamRef.current.getScreenshot();
+    setImgSrc(imageSrc);
+  }, [webcamRef, setImgSrc]);
 
-  const handleInputChange = (e: any) => {
-    const { id, value } = e.target;
+ if (imgSrc !== null){ var myHeaders = new Headers();
+myHeaders.append("key", `637766840968febde7076eeb${Math.random()}`);
 
-    if (id === "email") {
-      setEmail(value);
-    }
-    if (id === "password") {
-      setPassword(value);
-    }
-  };
+var formdata = new FormData();
+formdata.append("file", imgSrc);
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: formdata
+};
+
+fetch("http://localhost:5000/ffr/recognise", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));}
+  // const handleInputChange = (e: any) => {
+  //   const { id, value } = e.target;
+
+  //   if (id === "email") {
+  //     setEmail(value);
+  //   }
+  //   if (id === "password") {
+  //     setPassword(value);
+  //   }
+  // };
 
   //   const handleSubmit = () =>{
   //     let obj = {
@@ -39,7 +65,7 @@ function RegistrationForm() {
   // }
 
   const handleSubmit = () => {
-    console.log(email, password);
+    console.log(username);
   };
 
   return (
@@ -48,7 +74,24 @@ function RegistrationForm() {
       <text className="title">
           Make a photo to log in, or go to register if you are here first time 
         </text>
-<WebcamCapture />
+        <div className="photosM phoM"> 
+    <Webcam
+    
+        audio={false}
+        height={900}
+        ref={webcamRef}
+        screenshotFormat="image/jpeg"
+        width={900}
+        videoConstraints={videoConstraints}
+      />
+      {imgSrc && <img  src={imgSrc} />}
+      </div>
+     
+      <div className="row padding">
+        <button onClick={capture}>Capture photo</button>
+       
+        
+      </div>
       
       </div>
       <div className="footer formMargin">
