@@ -1,44 +1,118 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Link } from "react-router-dom";
 
-import { FaEyeSlash, FaEye } from "react-icons/fa";
-import { WebcamCapture } from "./VideoPlayer";
 import Webcam from "react-webcam";
 function RegistrationForm() {
   const [username, setUsername] = useState();
-  
+  const [per, setPer] = useState(true)
+  const [per1, setPer1] = useState(true)
 
-  
-
-  
   const videoConstraints = {
     width: 1280,
     height: 720,
     facingMode: "user",
   };
   const [imgSrc, setImgSrc] = useState(null);
+  const [usernameToSend, setUsernameToSend] = useState()
+  const [emotion, setEmotion] = useState()
   const webcamRef = React.useRef<any>();
   const capture = React.useCallback(() => {
   const imageSrc = webcamRef.current.getScreenshot();
     setImgSrc(imageSrc);
   }, [webcamRef, setImgSrc]);
 
- if (imgSrc !== null){ var myHeaders = new Headers();
-myHeaders.append("key", `637766840968febde7076eeb${Math.random()}`);
+  async function dataUrlToFile(dataUrl: RequestInfo | URL, fileName: string) {
+    const res = await fetch(dataUrl);
+    const blob = await res.blob();
+    return new File([blob], fileName, { type: "image/png" });
+  }
 
-var formdata = new FormData();
-formdata.append("file", imgSrc);
+  async function sendToRecognise(imgSrc:any, username:string|undefined){
+    let fileImg: any = null
+  if (imgSrc ){
+    const readyFile = await dataUrlToFile(imgSrc, "fileName");
+    console.log(readyFile);
+    fileImg = readyFile
+    console.log(fileImg)
+    };
+  
+ if(imgSrc && per ){
+   var myHeaders = new Headers();
+  myHeaders.append("key", `637766840968febde7076eeb`);
 
-var requestOptions = {
-  method: 'POST',
-  headers: myHeaders,
-  body: formdata
-};
 
-fetch("http://localhost:5000/ffr/recognise", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));}
+  var formdata = new FormData();
+  formdata.append("file",fileImg );
+  formdata.append("label",`${username}` );
+  
+  var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: formdata
+  };
+  console.log("file",fileImg)
+  
+  fetch(`http://localhost:5000/ffr/recognise`, requestOptions)
+    .then(response => response.json())
+    .then(result => setUsernameToSend(result.results[0]) )
+    .catch(error => console.log('error', error));}}
+
+
+
+console.log("dlaBartka",usernameToSend)
+    sendToRecognise(imgSrc, "")
+    // if(usernameToSend){    var myHeaders = new Headers();
+    //   myHeaders.append("Accept", "application/json;odata.metadata=minimal;odata.streaming=true");
+      
+    //   var formdata = new FormData();
+    //   formdata.append("name", usernameToSend);
+      
+    //   var requestOptions = {
+    //     method: 'POST',
+    //     headers: myHeaders,
+    //     body: formdata
+    //   };
+      
+    //   fetch("https://localhost:5001/api/Movie/createUser", requestOptions)
+    //     .then(response => response.text())
+    //     .then(result => console.log(result))
+    //     .catch(error => console.log('error', error));}
+
+        async function getEmotion(imgSrc:any, username:string|undefined){
+          let fileImg: any = null
+        if (imgSrc ){
+          const readyFile = await dataUrlToFile(imgSrc, "fileName");
+          console.log(readyFile);
+          fileImg = readyFile
+          console.log(fileImg)
+          };
+        
+       if(imgSrc && per1 ){
+         var myHeaders = new Headers();
+        myHeaders.append("key", `637766840968febde7076eeb`);
+      
+      
+        var formdata = new FormData();
+        formdata.append("file",fileImg );
+       
+        
+        var requestOptions = {
+          method: 'POST',
+          headers: myHeaders,
+          body: formdata
+        };
+        console.log("file",fileImg)
+        
+        fetch(`http://localhost:5000/ffr/emotion`, requestOptions)
+          .then(response => response.json())
+          .then(result => setEmotion(result) )
+          .catch(error => console.log('error', error));}}
+      
+      
+      
+      console.log("emocje",emotion)
+          getEmotion(imgSrc, "")
+
   // const handleInputChange = (e: any) => {
   //   const { id, value } = e.target;
 

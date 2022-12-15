@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Webcam from "react-webcam";
-import { WebcamCapture } from "./VideoPlayer";
-import thwack from "thwack";
+
 
 function RegistrationForm() {
-  const [username, setUserName] = useState();
+  const [username, setUserName] = useState<string>();
   const videoConstraints = {
     width: 1280,
     height: 720,
@@ -27,49 +26,44 @@ function RegistrationForm() {
     }
    
   };
+ 
+  async function dataUrlToFile(dataUrl: RequestInfo | URL, fileName: string) {
+    const res = await fetch(dataUrl);
+    const blob = await res.blob();
+    return new File([blob], fileName, { type: "image/png" });
+  }
 
-  const useBlobUrl = (imageUrl: any) => {
-    const [blobUrl, setBlobUrl] = useState("");
+  async function test(imgSrc:any, username:string|undefined){
+    let fileImg: any = null
+  if (imgSrc){
+    const readyFile = await dataUrlToFile(imgSrc, "fileName");
+    console.log(readyFile);
+    fileImg = readyFile
+    console.log(fileImg)
+    };
   
-    useEffect(() => {
-      // get the blob URL for this image URL (or null)
-      let url = sessionStorage.getItem(imageUrl);
-  
-      async function fetchData() {
-        if (!url) {
-          // skip load if we have a URL previously stored in sessionStorage
-          const { data } = await thwack.get(imageUrl, { responseType: "blob" });
-          url = URL.createObjectURL(data); // create a "blob URL" (lasts per session)
-          sessionStorage.setItem(imageUrl, url); // save in session storage
-        }
-        setBlobUrl(url); // set in state
-      }
-  
-      fetchData();
-    }, [imageUrl]); // only execure if imageUrl changes
-  
-    return blobUrl;
-  };
- const dupa = useBlobUrl(imgSrc)
-  console.log(dupa)
- if(imgSrc && username){ var myHeaders = new Headers();
+ if(imgSrc && username ){
+   var myHeaders = new Headers();
   myHeaders.append("key", `637766840968febde7076eeb`);
 
-const test = {data:[imgSrc]}
+
   var formdata = new FormData();
-  formdata.append("file",test.data[0], dupa );
-  formdata.append("label",username );
+  formdata.append("file",fileImg );
+  formdata.append("label",`${username}` );
   
   var requestOptions = {
     method: 'POST',
     headers: myHeaders,
     body: formdata
   };
+  console.log("file",fileImg)
   
-  fetch("http://localhost:5000/ffr/encode", requestOptions)
-    .then(response => response.text)
+  fetch(`http://localhost:5000/ffr/encode`, requestOptions)
+    .then(response => response.text())
     .then(result => console.log(result))
-    .catch(error => console.log('error', error));}
+    .catch(error => console.log('error', error));}}
+
+    test(imgSrc, username)
   //   const handleSubmit = () =>{
   //     let obj = {
   //             firstName : firstName,
@@ -105,7 +99,7 @@ const test = {data:[imgSrc]}
         width={900}
         videoConstraints={videoConstraints}
       />
-      {imgSrc && <img  src={dupa} />}
+      {imgSrc && <img  src={imgSrc} />}
       </div>
      
       <div className="row padding">
