@@ -8,6 +8,7 @@ using System.Linq.Dynamic.Core;
 using System.Text;
 using System.Linq;
 using System.Data.Entity.Migrations;
+using System.Data.Entity;
 
 namespace FA.Services.Movie
 {
@@ -32,9 +33,25 @@ namespace FA.Services.Movie
 
         public List<MovieInfo> getAllMovies()
         {
-            var movies = faDbContext.Set<Domain.Entities.Movie>().AsNoTracking();
+            var movies = faDbContext.Set<Domain.Entities.Movie>().Take(500).AsNoTracking().Include(x=>x.MovieTypes).ToList();
             var moviesVm = new List<MovieInfo>();
-            mapper.Map(movies, moviesVm);
+            foreach (var movie in movies)
+            {
+                var movieVm = mapper.Map<MovieInfo>(movie);
+                moviesVm.Add(movieVm);
+            }
+            return moviesVm;
+        }
+
+        public List<MovieInfo> getMoviesBasedOnType(List<int> typeIds)
+        {
+            var movies = faDbContext.Set<Domain.Entities.Movie>().Include(x => x.MovieTypes).Where(x=>x.MovieTypes.Select(y=>y.Id).Any(z=>typeIds.Contains(z))).AsNoTracking().ToList();
+            var moviesVm = new List<MovieInfo>();
+            foreach (var movie in movies)
+            {
+                var movieVm = mapper.Map<MovieInfo>(movie);
+                moviesVm.Add(movieVm);
+            }
             return moviesVm;
         }
 

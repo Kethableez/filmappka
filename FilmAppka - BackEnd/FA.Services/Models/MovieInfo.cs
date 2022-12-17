@@ -10,7 +10,7 @@ namespace FA.Services.Models
 
         public string Title { get; set; }
 
-        public string YearOfProduction { get; set; }
+        public int YearOfProduction { get; set; }
 
         public decimal Rating { get; set; }
 

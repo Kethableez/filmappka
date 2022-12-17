@@ -37,6 +37,20 @@ namespace FA.RestApi.Controllers
             }
         }
 
+        [HttpPost("getMoviesBasedOnType")]
+        public List<MovieInfo> getMoviesBasedOnType(List<int> typeIds)
+        {
+            try
+            {
+                return movieService.getMoviesBasedOnType(typeIds);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                throw new Exception("", ex);
+            }
+        }
+
         [HttpGet("getWatchedMoviesForUser")]
         public List<MovieInfo> getWatchedMoviesForUser(int userId)
         {
