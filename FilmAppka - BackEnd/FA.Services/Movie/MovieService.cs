@@ -33,7 +33,7 @@ namespace FA.Services.Movie
 
         public List<MovieInfo> getAllMovies()
         {
-            var movies = faDbContext.Set<Domain.Entities.Movie>().Take(500).AsNoTracking().Include(x=>x.MovieTypes).ToList();
+            var movies = faDbContext.Set<Domain.Entities.Movie>().Take(500).AsNoTracking().Include(x => x.MovieTypes).ToList();
             var moviesVm = new List<MovieInfo>();
             foreach (var movie in movies)
             {
@@ -43,9 +43,14 @@ namespace FA.Services.Movie
             return moviesVm;
         }
 
+        private bool checkForTypes(List<int> MovieTypeIds, List<int> desiredTypeIds)
+        {
+            return MovieTypeIds.Intersect(MovieTypeIds).Count() == desiredTypeIds.Count();
+        }
+
         public List<MovieInfo> getMoviesBasedOnType(List<int> typeIds)
         {
-            var movies = faDbContext.Set<Domain.Entities.Movie>().Include(x => x.MovieTypes).Where(x=>x.MovieTypes.Select(y=>y.Id).Any(z=>typeIds.Contains(z))).AsNoTracking().ToList();
+            var movies = faDbContext.Set<Domain.Entities.Movie>().Include(x => x.MovieTypes).Where(x => x.MovieTypes.Select(y => y.Id).Intersect(typeIds).Count() == typeIds.Count()).AsNoTracking().ToList();
             var moviesVm = new List<MovieInfo>();
             foreach (var movie in movies)
             {

@@ -13,6 +13,7 @@ namespace FA.DataAccess.EntityConfiguration
             HasKey(x => x.Id);
             Property(x => x.Name).IsRequired();
             Property(x => x.Rating).IsRequired();
+            Property(x => x.NumberOfVoters).IsRequired();
             Property(x => x.YearOfProduction).IsRequired();
             HasMany(x => x.MovieTypes).WithMany(x=>x.Movies);
         }

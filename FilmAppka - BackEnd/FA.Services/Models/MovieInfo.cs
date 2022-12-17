@@ -14,6 +14,8 @@ namespace FA.Services.Models
 
         public decimal Rating { get; set; }
 
+        public int NumberOfVoters { get; set; }
+
         public string Description { get; set; }
 
         public List<TypeInfo> Type { get; set; }

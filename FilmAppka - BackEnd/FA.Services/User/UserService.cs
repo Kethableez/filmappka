@@ -89,6 +89,7 @@ namespace FA.Services.User
                             Name = fields[6],
                             YearOfProduction = int.Parse(fields[11].Split("-")[0]),
                             Rating = decimal.Parse(fields[18].Replace(".", ",")),
+                            NumberOfVoters = int.Parse(fields[19]),
                             Description = fields[7],
                             MovieTypes = typesDb,
                         };
