@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Webcam from "react-webcam";
 
@@ -33,7 +33,7 @@ function RegistrationForm() {
     return new File([blob], fileName, { type: "image/png" });
   }
 
-  async function test(imgSrc:any, username:string|undefined){
+  async function sendRegisterData(imgSrc:any, username:string|undefined){
     let fileImg: any = null
   if (imgSrc){
     const readyFile = await dataUrlToFile(imgSrc, "fileName");
@@ -63,7 +63,7 @@ function RegistrationForm() {
     .then(result => console.log(result))
     .catch(error => console.log('error', error));}}
 
-    test(imgSrc, username)
+    // sendRegisterData(imgSrc, username)
   //   const handleSubmit = () =>{
   //     let obj = {
   //             firstName : firstName,
@@ -78,9 +78,10 @@ function RegistrationForm() {
   //     return update(ref(database), updates);
   // }
 
-  const handleSubmit = () => {
+  const handleSubmit = useCallback(() => {
     console.log(username,imgSrc);
-  };
+    sendRegisterData(imgSrc, username)
+  },[username,imgSrc]);
 
   return (
     <div className="form">

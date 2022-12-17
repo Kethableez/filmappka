@@ -60,7 +60,7 @@ function RegistrationForm() {
 
 
 console.log("dlaBartka",usernameToSend)
-    sendToRecognise(imgSrc, "")
+    // sendToRecognise(imgSrc, "")
     // if(usernameToSend){    var myHeaders = new Headers();
     //   myHeaders.append("Accept", "application/json;odata.metadata=minimal;odata.streaming=true");
       
@@ -138,9 +138,11 @@ console.log("dlaBartka",usernameToSend)
   //     return update(ref(database), updates);
   // }
 
-  const handleSubmit = () => {
-    console.log(username);
-  };
+  const handleSubmit = useCallback( () => {
+    sendToRecognise(imgSrc, "")
+    // getEmotion(imgSrc, "")
+
+  },[imgSrc]);
 
   return (
     <div className="loginForm">
