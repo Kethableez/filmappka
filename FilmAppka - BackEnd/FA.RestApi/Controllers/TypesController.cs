@@ -92,6 +92,7 @@ namespace FA.RestApi.Controllers
                 throw new Exception("", ex);
             }
         }
+
         [HttpGet("getLikedMovieTypes")]
         public List<TypeInfo> getLikedMovieTypes(int userId)
         {

@@ -10,9 +10,11 @@ namespace FA.Services.Models
 
         public string Title { get; set; }
 
-        public string YearOfProduction { get; set; }
+        public int YearOfProduction { get; set; }
 
         public decimal Rating { get; set; }
+
+        public int NumberOfVoters { get; set; }
 
         public string Description { get; set; }
 

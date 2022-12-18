@@ -37,6 +37,34 @@ namespace FA.RestApi.Controllers
             }
         }
 
+        [HttpPost("getMoviesBasedOnTypeAndKeywords")]
+        public List<MovieInfo> getMoviesBasedOnTypeAndKeywords(List<int> typeIds, List<int> keywrodIds)
+        {
+            try
+            {
+                return movieService.getMoviesBasedOnTypeAndKeywords(typeIds,keywrodIds);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                throw new Exception("", ex);
+            }
+        }
+
+        [HttpGet("getAllKeywords")]
+        public List<KeywordInfo> getAllKeywords()
+        {
+            try
+            {
+                return movieService.getAllKeywords();
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                throw new Exception("", ex);
+            }
+        }
+
         [HttpGet("getWatchedMoviesForUser")]
         public List<MovieInfo> getWatchedMoviesForUser(int userId)
         {
@@ -51,7 +79,7 @@ namespace FA.RestApi.Controllers
             }
         }
         [HttpPatch("addMovieAsWatched")]
-        public void addMovieAsWatched(int userId,int movieId)
+        public void addMovieAsWatched(int userId, int movieId)
         {
             try
             {

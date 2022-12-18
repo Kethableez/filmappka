@@ -14,10 +14,14 @@ namespace FA.Domain.Entities
 
         public decimal Rating { get; set; }
 
+        public int NumberOfVoters { get; set; }
+
         public string Description { get; set; }
 
         public ICollection<MovieTypesEnum> MovieTypes { get; set; } = new List<MovieTypesEnum>();
 
         public ICollection<User> WatchedByUser { get; set; }
+
+        public ICollection<Keyword> Keywords { get; set; } = new List<Keyword>();
     }
 }
