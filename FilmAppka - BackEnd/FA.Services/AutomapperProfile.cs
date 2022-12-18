@@ -13,20 +13,35 @@ namespace FA.Services
         public AutomapperProfile()
         {
             CreateMap<Domain.Entities.User, UserInfo>();
+
             CreateMap<MovieTypesEnum, TypeInfo>()
                 .ForMember(d => d.Name, s => s.MapFrom(x => x.Value));
+
             CreateMap<TypeInfo, MovieTypesEnum>()
                 .ForMember(d => d.Value, s => s.MapFrom(x => x.Name));
+
             CreateMap<TypeJsonModel, MovieTypesEnum>()
                 .ForMember(d => d.Value, s => s.MapFrom(x => x.name));
+
             CreateMap<TypeJsonModel, TypeInfo>()
                 .ForMember(d => d.Name, s => s.MapFrom(x => x.name));
+
             CreateMap<Domain.Entities.Movie, MovieInfo>()
                 .ForMember(d => d.Title, s => s.MapFrom(x => x.Name))
                 .ForMember(d => d.Type, s => s.MapFrom(x => x.MovieTypes));
+
             CreateMap<MovieInfo, Domain.Entities.Movie>()
                 .ForMember(d => d.Name, s => s.MapFrom(x => x.Title))
                 .ForMember(d => d.MovieTypes, s => s.MapFrom(x => x.Type));
+
+            CreateMap<Keyword, KeywordInfo>()
+                .ForMember(d => d.Name, s => s.MapFrom(x => x.Value));
+
+            CreateMap<KeywordInfo, Keyword>()
+                .ForMember(d => d.Value, s => s.MapFrom(x => x.Name));
+
+            CreateMap<keywordJsonModel, Keyword>()
+                .ForMember(d => d.Value, s => s.MapFrom(x => x.name));
         }
     }
 }

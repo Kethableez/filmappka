@@ -21,5 +21,7 @@ namespace FA.Domain.Entities
         public ICollection<MovieTypesEnum> MovieTypes { get; set; } = new List<MovieTypesEnum>();
 
         public ICollection<User> WatchedByUser { get; set; }
+
+        public ICollection<Keyword> Keywords { get; set; } = new List<Keyword>();
     }
 }

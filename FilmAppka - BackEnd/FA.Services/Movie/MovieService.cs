@@ -43,14 +43,11 @@ namespace FA.Services.Movie
             return moviesVm;
         }
 
-        private bool checkForTypes(List<int> MovieTypeIds, List<int> desiredTypeIds)
+        public List<MovieInfo> getMoviesBasedOnTypeAndKeywords(List<int> typeIds, List<int> keywordIds)
         {
-            return MovieTypeIds.Intersect(MovieTypeIds).Count() == desiredTypeIds.Count();
-        }
-
-        public List<MovieInfo> getMoviesBasedOnType(List<int> typeIds)
-        {
-            var movies = faDbContext.Set<Domain.Entities.Movie>().Include(x => x.MovieTypes).Where(x => x.MovieTypes.Select(y => y.Id).Intersect(typeIds).Count() == typeIds.Count()).AsNoTracking().ToList();
+            var movies = faDbContext.Set<Domain.Entities.Movie>().Include(x => x.MovieTypes).Include(x => x.Keywords)
+                .Where(x => x.MovieTypes.Select(y => y.Id).Intersect(typeIds).Count() == typeIds.Count() || x.Keywords.Select(y => y.Id).Any(z=>keywordIds.Contains(z)))
+                .AsNoTracking().ToList();
             var moviesVm = new List<MovieInfo>();
             foreach (var movie in movies)
             {
@@ -58,6 +55,13 @@ namespace FA.Services.Movie
                 moviesVm.Add(movieVm);
             }
             return moviesVm;
+        }
+
+        public List<KeywordInfo> getAllKeywords()
+        {
+            var keywords = faDbContext.Set<Keyword>().ToList();
+            var keywordsVm = mapper.Map<List<KeywordInfo>>(keywords);
+            return keywordsVm;
         }
 
         public List<MovieInfo> getWatchedMoviesForUser(int userId)
