@@ -1,4 +1,5 @@
-﻿using FA.Services.Models;
+﻿using FA.RestApi.Models;
+using FA.Services.Models;
 using FA.Services.Movie;
 using Microsoft.AspNet.OData.Query;
 using Microsoft.AspNetCore.Authorization;
@@ -38,11 +39,11 @@ namespace FA.RestApi.Controllers
         }
 
         [HttpPost("getMoviesBasedOnTypeAndKeywords")]
-        public List<MovieInfo> getMoviesBasedOnTypeAndKeywords(List<int> typeIds, List<int> keywrodIds)
+        public List<MovieInfo> getMoviesBasedOnTypeAndKeywords(MoviesBasedOnTypeAndKeywordsRequestModel model)
         {
             try
             {
-                return movieService.getMoviesBasedOnTypeAndKeywords(typeIds,keywrodIds);
+                return movieService.getMoviesBasedOnTypeAndKeywords(model.typeIds,model.keywordIds);
             }
             catch (Exception ex)
             {
