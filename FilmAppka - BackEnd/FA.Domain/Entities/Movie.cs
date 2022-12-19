@@ -18,6 +18,8 @@ namespace FA.Domain.Entities
 
         public string Description { get; set; }
 
+        public string ImageLink { get; set; }
+
         public ICollection<MovieTypesEnum> MovieTypes { get; set; } = new List<MovieTypesEnum>();
 
         public ICollection<User> WatchedByUser { get; set; }
