@@ -7,6 +7,7 @@ import utils.mongo as mongo
 from faceapi.faceEncoding import encodeFace, saveEncoding
 from faceapi.faceRecognition import recogniseFace
 from faceapi.moodDetection import detectMood
+from movieapi.movieRecommending import recommendMovies
 
 D_TYPE = 'uint8'
 URI = 'mongodb://ffr-db:27000'
@@ -25,7 +26,6 @@ collection = mongo.Collection(connection, COLL_NAME)
 def validateKey(key):
   if not key or key != API_KEY:
     raise HTTPError('asd', 401, 'Invalid or empty API KEY', 'asd', None)
-
 
 @app.post('/ffr/encode')
 def encode():
@@ -83,9 +83,28 @@ def emotions():
   except Exception as e:
     return { 'message': str(e) }, 400
 
+@app.post('/ffr/recommendations')
+def recommendation():
+
+  requestData = request.json['emotion']
+  mood = ""
+
+  # traverse in the string
+  for ele in requestData:
+    mood += ele
+
+  print(mood)
+  try:
+    result = recommendMovies(mood)
+    print('recommended')
+    return result
+  except Exception as e:
+    print(e)
+    return { 'message': str(e) }, 400
+
 @app.get('/ffr/health')
 def healthCheck():
   return { 'message': 'up an running'}
 
 if __name__ == '__main__':
-  app.run()
+  app.run(port=7000)
