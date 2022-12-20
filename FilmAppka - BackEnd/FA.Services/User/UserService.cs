@@ -82,6 +82,11 @@ namespace FA.Services.User
                     var typesDb = faDbContext.Set<MovieTypesEnum>().Where(x => typeNames.Contains(x.Value)).ToList();
                     if (fields[11] != "")
                     {
+                        var image = "";
+                        if(fields.Length == 21)
+                        {
+                            image = fields[20];
+                        }
                         var movieVm = new Domain.Entities.Movie()
                         {
                             Name = fields[6],
@@ -90,6 +95,7 @@ namespace FA.Services.User
                             NumberOfVoters = int.Parse(fields[19]),
                             Description = fields[7],
                             MovieTypes = typesDb,
+                            ImageLink = image,
                         };
                         var movie = mapper.Map<Domain.Entities.Movie>(movieVm);
                         faDbContext.Set<Domain.Entities.Movie>().AddIfNotExists(movie, x => x.Name == movie.Name);
