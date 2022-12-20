@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\FilmAppka - BackEnd",
+    "\\FilmAppka - BackEnd\\FA.DataAccess",
+    "\\FilmAppka - BackEnd\\FA.RestApi",
+    "\\FilmAppka - BackEnd\\FA.RestApi\\Controllers",
+    "\\FilmAppka - BackEnd\\FA.Services",
+    "\\FilmAppka - BackEnd\\FA.Services\\Movie",
+    "\\FilmAppka - BackEnd\\FA.Services\\User"
+  ],
+  "SelectedNode": "\\FilmAppka - BackEnd\\FA.Services\\Movie\\IMovieService.cs",
+  "PreviewInSolutionExplorer": false
+}

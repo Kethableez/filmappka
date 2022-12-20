@@ -58,17 +58,11 @@ namespace FA.Services.User
                 {
                     string[] fields = csvParser.ReadFields();
                     var typesJson = JsonSerializer.Deserialize<List<TypeJsonModel>>(fields[1]);
-                    var keywordJson = JsonSerializer.Deserialize<List<keywordJsonModel>>(fields[4]);
                     foreach (var type in typesJson)
                     {
                         var typeDbModel = mapper.Map<MovieTypesEnum>(type);
                         faDbContext.Set<MovieTypesEnum>().AddIfNotExists(typeDbModel, x => x.Value.ToLower() == typeDbModel.Value.ToLower());
 
-                    }
-                    foreach (var keyword in keywordJson)
-                    {
-                        var keywordDbModel = mapper.Map<Keyword>(keyword);
-                        faDbContext.Set<Keyword>().AddIfNotExists(keywordDbModel, x => x.Value.ToLower() == keywordDbModel.Value.ToLower());
                     }
                     faDbContext.SaveChanges();
                 }
@@ -85,11 +79,14 @@ namespace FA.Services.User
                 {
                     string[] fields = csvParser.ReadFields();
                     var typeNames = JsonSerializer.Deserialize<List<TypeJsonModel>>(fields[1]).Select(x=>x.name);
-                    var keywordNames = JsonSerializer.Deserialize<List<keywordJsonModel>>(fields[4]).Select(x=>x.name);
                     var typesDb = faDbContext.Set<MovieTypesEnum>().Where(x => typeNames.Contains(x.Value)).ToList();
-                    var keywordDb = faDbContext.Set<Keyword>().Where(x => keywordNames.Contains(x.Value)).ToList();
                     if (fields[11] != "")
                     {
+                        var image = "";
+                        if(fields.Length == 21)
+                        {
+                            image = fields[20];
+                        }
                         var movieVm = new Domain.Entities.Movie()
                         {
                             Name = fields[6],
@@ -98,7 +95,7 @@ namespace FA.Services.User
                             NumberOfVoters = int.Parse(fields[19]),
                             Description = fields[7],
                             MovieTypes = typesDb,
-                            Keywords = keywordDb,
+                            ImageLink = image,
                         };
                         var movie = mapper.Map<Domain.Entities.Movie>(movieVm);
                         faDbContext.Set<Domain.Entities.Movie>().AddIfNotExists(movie, x => x.Name == movie.Name);

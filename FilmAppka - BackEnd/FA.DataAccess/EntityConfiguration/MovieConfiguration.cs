@@ -15,8 +15,8 @@ namespace FA.DataAccess.EntityConfiguration
             Property(x => x.Rating).IsRequired();
             Property(x => x.NumberOfVoters).IsRequired();
             Property(x => x.YearOfProduction).IsRequired();
+            Property(x => x.ImageLink).IsOptional();
             HasMany(x => x.MovieTypes).WithMany(x=>x.Movies);
-            HasMany(x => x.Keywords).WithMany(x => x.Movies);
         }
     }
 }

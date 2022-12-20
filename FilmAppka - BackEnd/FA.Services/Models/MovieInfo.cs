@@ -18,6 +18,8 @@ namespace FA.Services.Models
 
         public string Description { get; set; }
 
+        public string ImageLink { get; set; }
+
         public List<TypeInfo> Type { get; set; }
     }
 }
