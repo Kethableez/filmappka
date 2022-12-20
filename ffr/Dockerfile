@@ -17,6 +17,6 @@ COPY app.py /api/app.py
 COPY wsgi.py /api/wsgi.py
 WORKDIR /api
 
-EXPOSE 5000
+EXPOSE 6666
 
 ENTRYPOINT ["bash", "/app/bin/run.sh"]
