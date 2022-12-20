@@ -23,19 +23,8 @@ api = Api(app)
 connection = mongo.Connection(URI, DB_NAME)
 collection = mongo.Collection(connection, COLL_NAME)
 
-def validateKey(key):
-  if not key or key != API_KEY:
-    raise HTTPError('asd', 401, 'Invalid or empty API KEY', 'asd', None)
-
 @app.post('/ffr/encode')
 def encode():
-  try:
-    apiKey = request.headers.get('Key')
-    validateKey(apiKey)
-  except HTTPError as e:
-    print(e)
-    return { 'message': e.msg }, e.status
-
   file = request.files['file']
   label = request.form['label']
   buff = np.asarray(bytearray(file.stream.read()), dtype=D_TYPE)
@@ -51,13 +40,6 @@ def encode():
 
 @app.post('/ffr/recognise')
 def recognise():
-  try:
-    apiKey = request.headers.get('Key')
-    validateKey(apiKey)
-  except HTTPError as e:
-    print(e)
-    return { 'message': e.msg }, e.status
-
   file = request.files['file']
   buff = np.asarray(bytearray(file.stream.read()), dtype=D_TYPE)
   try:
@@ -69,12 +51,6 @@ def recognise():
 
 @app.post('/ffr/emotion')
 def emotions():
-  try:
-    apiKey = request.headers.get('Key')
-    validateKey(apiKey)
-  except HTTPError as e:
-    print(e)
-    return { 'message': e.msg }, e.status
   file = request.files['file']
   buff = np.asarray(bytearray(file.stream.read()), dtype=D_TYPE)
   try:
@@ -107,4 +83,4 @@ def healthCheck():
   return { 'message': 'up an running'}
 
 if __name__ == '__main__':
-  app.run(port=7000)
+  app.run()
