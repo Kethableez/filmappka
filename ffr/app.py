@@ -7,6 +7,7 @@ import utils.mongo as mongo
 from faceapi.faceEncoding import encodeFace, saveEncoding
 from faceapi.faceRecognition import recogniseFace
 from faceapi.moodDetection import detectMood
+from movieapi.movieRecommending import recommendMovies
 
 D_TYPE = 'uint8'
 URI = 'mongodb://ffr-db:27000'
@@ -22,20 +23,8 @@ api = Api(app)
 connection = mongo.Connection(URI, DB_NAME)
 collection = mongo.Collection(connection, COLL_NAME)
 
-def validateKey(key):
-  if not key or key != API_KEY:
-    raise HTTPError('asd', 401, 'Invalid or empty API KEY', 'asd', None)
-
-
 @app.post('/ffr/encode')
 def encode():
-  try:
-    apiKey = request.headers.get('Key')
-    validateKey(apiKey)
-  except HTTPError as e:
-    print(e)
-    return { 'message': e.msg }, e.status
-
   file = request.files['file']
   label = request.form['label']
   buff = np.asarray(bytearray(file.stream.read()), dtype=D_TYPE)
@@ -51,13 +40,6 @@ def encode():
 
 @app.post('/ffr/recognise')
 def recognise():
-  try:
-    apiKey = request.headers.get('Key')
-    validateKey(apiKey)
-  except HTTPError as e:
-    print(e)
-    return { 'message': e.msg }, e.status
-
   file = request.files['file']
   buff = np.asarray(bytearray(file.stream.read()), dtype=D_TYPE)
   try:
@@ -69,18 +51,31 @@ def recognise():
 
 @app.post('/ffr/emotion')
 def emotions():
-  try:
-    apiKey = request.headers.get('Key')
-    validateKey(apiKey)
-  except HTTPError as e:
-    print(e)
-    return { 'message': e.msg }, e.status
   file = request.files['file']
   buff = np.asarray(bytearray(file.stream.read()), dtype=D_TYPE)
   try:
     result = detectMood(buff)
     return result
   except Exception as e:
+    return { 'message': str(e) }, 400
+
+@app.post('/ffr/recommendations')
+def recommendation():
+
+  requestData = request.json['emotion']
+  mood = ""
+
+  # traverse in the string
+  for ele in requestData:
+    mood += ele
+
+  print(mood)
+  try:
+    result = recommendMovies(mood)
+    print('recommended')
+    return result
+  except Exception as e:
+    print(e)
     return { 'message': str(e) }, 400
 
 @app.get('/ffr/health')
