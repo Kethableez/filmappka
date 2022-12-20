@@ -33,15 +33,6 @@ namespace FA.Services
             CreateMap<MovieInfo, Domain.Entities.Movie>()
                 .ForMember(d => d.Name, s => s.MapFrom(x => x.Title))
                 .ForMember(d => d.MovieTypes, s => s.MapFrom(x => x.Type));
-
-            CreateMap<Keyword, KeywordInfo>()
-                .ForMember(d => d.Name, s => s.MapFrom(x => x.Value));
-
-            CreateMap<KeywordInfo, Keyword>()
-                .ForMember(d => d.Value, s => s.MapFrom(x => x.Name));
-
-            CreateMap<keywordJsonModel, Keyword>()
-                .ForMember(d => d.Value, s => s.MapFrom(x => x.name));
         }
     }
 }
