@@ -8,7 +8,7 @@ from sklearn.metrics.pairwise import linear_kernel
 
 
 # Database port
-localhost = "localhost:5001"
+localhost = "fa-api:5001"
 api_url = "https://%s/api/Movie/getMoviesBasedOnTypeAndKeywords" % localhost
 
 

@@ -14,7 +14,7 @@ namespace FA.DataAccess
         public FADbContext Create()
         {
             
-           return new FADbContext(@"Server=localhost\SQLEXPRESS;Database=FilmappkaDB;Integrated Security=true;");
+           return new FADbContext(@"Server=fa-db;Database=FilmAppkaDB;User=sa;Password=S3cur3P@ssW0rd!;");
         }
     }
 }

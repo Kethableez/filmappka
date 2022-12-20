@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  fa-api:
+    container_name: fa-api
+    build:
+      context: ./FilmAppka - BackEnd
+      dockerfile: Dockerfile
+    ports:
+     - "5000:5000"
+     - "5001:5001"
+    expose:
+      - 5000
+      - 5001
+    depends_on:
+      - fa-db
+
+  fa-db:
+    container_name: fa-db
+    image: "mcr.microsoft.com/mssql/server:2022-latest"
+    ports:
+      - "1433:1433"
+    expose:
+      - 1443
+    environment:
+        SA_PASSWORD: "S3cur3P@ssW0rd!"
+        ACCEPT_EULA: "Y"
+
+  ffr-db:
+    container_name: ffr-db
+    image: mongo
+    command: mongod --port 27000
+    expose:
+      - 27000
+    ports:
+      - "27000:27000"
+
+  ffr-api:
+    container_name: ffr-api
+    depends_on:
+      - ffr-db
+      - fa-api
+    build:
+      context: ./ffr
+      target: api
+    expose:
+      - 6666
+    ports:
+      - "6666:6666"

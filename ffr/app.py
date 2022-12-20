@@ -7,6 +7,7 @@ import utils.mongo as mongo
 from faceapi.faceEncoding import encodeFace, saveEncoding
 from faceapi.faceRecognition import recogniseFace
 from faceapi.moodDetection import detectMood
+import sys;
 from movieapi.movieRecommending import recommendMovies
 
 D_TYPE = 'uint8'
@@ -46,7 +47,6 @@ def recognise():
     result = recogniseFace(buff, collection)
     return result
   except Exception as e:
-    print(e)
     return { 'message': str(e) }, 400
 
 @app.post('/ffr/emotion')
@@ -69,13 +69,10 @@ def recommendation():
   for ele in requestData:
     mood += ele
 
-  print(mood)
   try:
     result = recommendMovies(mood)
-    print('recommended')
     return result
   except Exception as e:
-    print(e)
     return { 'message': str(e) }, 400
 
 @app.get('/ffr/health')
@@ -83,4 +80,4 @@ def healthCheck():
   return { 'message': 'up an running'}
 
 if __name__ == '__main__':
-  app.run()
+  app.run(port=6666)

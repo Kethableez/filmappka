@@ -20,3 +20,4 @@ WORKDIR /api
 EXPOSE 6666
 
 ENTRYPOINT ["bash", "/app/bin/run.sh"]
+# ENTRYPOINT [ "python", "/api/app.py" ]
