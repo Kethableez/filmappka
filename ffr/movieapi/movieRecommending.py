@@ -9,7 +9,7 @@ from sklearn.metrics.pairwise import linear_kernel
 
 # Database port
 localhost = "fa-api:5001"
-api_url = "https://%s/api/Movie/getMoviesBasedOnTypeAndKeywords" % localhost
+api_url = "https://%s/api/Movie/getMoviesBasedOnType" % localhost
 
 
 # Function that takes in movie title as input and outputs most similar movies
@@ -44,9 +44,6 @@ def recommendMovies(mood):
         movies_to_mood = {
             "typeIds": [
                 7
-            ],
-            "keywordIds": [
-                216
             ]
         }
 
@@ -54,9 +51,6 @@ def recommendMovies(mood):
         movies_to_mood = {
             "typeIds": [
                 7
-            ],
-            "keywordIds": [
-                216
             ]
         }
 
@@ -64,9 +58,6 @@ def recommendMovies(mood):
         movies_to_mood = {
             "typeIds": [
                 1
-            ],
-            "keywordIds": [
-                216
             ]
         }
 
@@ -74,9 +65,6 @@ def recommendMovies(mood):
         movies_to_mood = {
             "typeIds": [
                 7
-            ],
-            "keywordIds": [
-                216
             ]
         }
 
@@ -84,9 +72,6 @@ def recommendMovies(mood):
         movies_to_mood = {
             "typeIds": [
                 2
-            ],
-            "keywordIds": [
-                216
             ]
         }
 
@@ -94,18 +79,12 @@ def recommendMovies(mood):
         movies_to_mood = {
             "typeIds": [
                 1
-            ],
-            "keywordIds": [
-                216
             ]
         }
 
     elif mood == 'neutral':
         movies_to_mood = {
             "typeIds": [
-                1
-            ],
-            "keywordIds": [
                 1
             ]
         }

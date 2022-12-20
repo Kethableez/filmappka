@@ -3,6 +3,9 @@ WORKDIR /api
 
 COPY . .
 
+# RUN dotnet tool install --global dotnet-ef --version 3.1.8
+# ENV PATH="$PATH:/root/.dotnet/tools"
+
 ARG BUILD_CONFIGURATION=Debug
 ENV ASPNETCORE_ENVIRONMENT=Development
 ENV DOTNET_USE_POLLING_FILE_WATCHER=true  
