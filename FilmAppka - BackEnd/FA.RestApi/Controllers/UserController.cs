@@ -76,6 +76,15 @@ namespace FA.RestApi.Controllers
         [HttpPatch("updateLastKnownEmotionForUser")]
         public void updateLastKnowEmotionForUser(int userId, string emotion)
         {
+            try
+            {
+                userService.saveEmotion(userId, emotion);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                throw new Exception("", ex);
+            }
 
         }
     }
