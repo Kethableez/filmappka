@@ -10,6 +10,8 @@ namespace FA.Domain.Entities
     {
         public string Username { get; set; }
 
+        public string LastKnownEmotion { get; set; }
+
         public ICollection<MovieTypesEnum> LikedMovieTypes { get; set; }
 
         public ICollection<MovieTypesEnum> HatedMovieTypes { get; set; }

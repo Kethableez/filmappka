@@ -12,6 +12,7 @@ namespace FA.DataAccess.EntityConfiguration
         {
             HasKey(x => x.Id);
             Property(x => x.Username).IsRequired();
+            Property(x => x.LastKnownEmotion).IsOptional();
             HasMany(x => x.WatchedMovies).WithMany(x => x.WatchedByUser);
             HasMany(x => x.LikedMovieTypes).WithMany(x => x.LikedByUser);
             HasMany(x => x.HatedMovieTypes).WithMany(x => x.HatedByUser);
