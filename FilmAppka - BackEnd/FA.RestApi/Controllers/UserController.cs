@@ -44,7 +44,7 @@ namespace FA.RestApi.Controllers
             }
         }
 
-        [HttpGet("crateUser")]
+        [HttpPost("createUser")]
         public void createUser(string username)
         {
             try
@@ -71,6 +71,12 @@ namespace FA.RestApi.Controllers
                 logger.Error(ex);
                 throw new Exception("", ex);
             }
+        }
+
+        [HttpPatch("updateLastKnownEmotionForUser")]
+        public void updateLastKnowEmotionForUser(int userId, string emotion)
+        {
+
         }
     }
 }

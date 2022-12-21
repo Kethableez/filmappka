@@ -38,8 +38,8 @@ namespace FA.RestApi.Controllers
             }
         }
 
-        [HttpPost("getMoviesBasedOnTypeAndKeywords")]
-        public List<MovieInfo> getMoviesBasedOnTypeAndKeywords(List<int> typeIds)
+        [HttpPost("getMoviesBasedOnType")]
+        public List<MovieInfo> getMoviesBasedOnType(List<int> typeIds)
         {
             try
             {
