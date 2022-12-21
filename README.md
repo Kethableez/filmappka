@@ -1,3 +1,9 @@
+# Konteneryzacja aplikacji
+Aby aplikacja poprawnie działała po uruchomieniu polecenia `docker-compose up --build -d` w folderze głównym należy podjąć następujące kroki:
+1. Połączyć się z bazą MSSQL
+2. Zaimportować plik `backupV2.bacpac` z folderu `./bak`
+3. Po pomyślnym imporcie można dopiero działać z API, które jest zainstalowane na kontenerach - w innym przypadku mogą pojawić się błędy związane z nieodpowiednim połączeniem między api fa-api a bazą danych fa-db
+
 # Movie Recommendation System
 
 Based on the given mood algorithm returns a list of 10 recommended movies to watch.
