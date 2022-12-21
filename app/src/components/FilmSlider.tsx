@@ -16,7 +16,11 @@ const FilmSlider: React.FC<FilmSliderProps> = ({}) => {
     rating: number;
     description: string;
   }
-  const [username, setUsername] = useState<string>("XYZ")
+  const [usernameInfo, setUsernameInfo] = useState<string>("XYZ")
+  const [userID, setUserID] = useState()
+  const [movieID, setMovieID] = useState()
+  const [movies1, setMovies] = useState()
+
   var myHeaders = new Headers();
 myHeaders.append("Accept", "application/json;odata.metadata=minimal;odata.streaming=true");
 
@@ -27,7 +31,7 @@ var requestOptions = {
 
 fetch("https://localhost:5001/api/User/getUser", requestOptions)
   .then(response => response.text())
-  .then(result => setUsername(result))
+  .then(result => setUsernameInfo(result))
   .catch(error => console.log('error', error));
 
   const movies: Movie[] = [
@@ -160,9 +164,10 @@ fetch("https://localhost:5001/api/User/getUser", requestOptions)
   const [isMovieWatched, setIsMovieWatched] = useState(false);
   const togglePassword = () => {
     setIsMovieWatched(!isMovieWatched)
+    if(isMovieWatched){
     var formdata = new FormData();
-formdata.append("title", movies[selectedMovieIndex!].title);
-formdata.append("isWatched", `${isMovieWatched}`);
+formdata.append("userId", userID!);
+formdata.append("movieId", movieID!);
 
 var requestOptions = {
   method: 'PATCH',
@@ -172,7 +177,21 @@ var requestOptions = {
 fetch("https://localhost:5001/api/Movie/addMovieAsWatched?=", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
-  .catch(error => console.log('error', error));;
+  .catch(error => console.log('error', error));}
+
+  if(!isMovieWatched){{ var formdata = new FormData();
+    formdata.append("userId", userID!);
+    formdata.append("movieId", movieID!);
+    
+    var requestOptions = {
+      method: 'PATCH',
+      body: formdata
+    };
+    
+    fetch("https://localhost:5001/api/Movie/removedMovieFromWatched?=", requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error))}}
   };
   const handleMovieImageClick = (index: number) => () =>
     setSelectedMovieIndex(index);
@@ -190,7 +209,7 @@ fetch("https://localhost:5001/api/Movie/addMovieAsWatched?=", requestOptions)
       <body>
         <div className="row">
           <div className="header">
-            <h3 className="title">{username} oto twoje filmy</h3>
+            <h3 className="title">{usernameInfo} oto twoje filmy</h3>
             <div className="progress-bar"></div>
           </div>
           <div className="container1">

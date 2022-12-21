@@ -74,7 +74,7 @@ console.log("dlaBartka",usernameToSend)
         body: formdata
       };
       
-      fetch("https://localhost:5001/api/Movie/CreateUser", requestOptions)
+      fetch("https://localhost:5001/api/Movie/createUser", requestOptions)
         .then(response => response.text())
         .then(result => console.log(result))
         .catch(error => console.log('error', error));}
