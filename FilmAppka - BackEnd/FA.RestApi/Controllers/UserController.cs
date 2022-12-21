@@ -44,7 +44,7 @@ namespace FA.RestApi.Controllers
             }
         }
 
-        [HttpGet("crateUser")]
+        [HttpPost("createUser")]
         public void createUser(string username)
         {
             try
