@@ -16,6 +16,20 @@ const FilmSlider: React.FC<FilmSliderProps> = ({}) => {
     rating: number;
     description: string;
   }
+  const [username, setUsername] = useState<string>("XYZ")
+  var myHeaders = new Headers();
+myHeaders.append("Accept", "application/json;odata.metadata=minimal;odata.streaming=true");
+
+var requestOptions = {
+  method: 'GET',
+  headers: myHeaders
+};
+
+fetch("https://localhost:5001/api/User/getUser", requestOptions)
+  .then(response => response.text())
+  .then(result => setUsername(result))
+  .catch(error => console.log('error', error));
+
   const movies: Movie[] = [
     {
       id: 0,
@@ -145,7 +159,20 @@ const FilmSlider: React.FC<FilmSliderProps> = ({}) => {
   >();
   const [isMovieWatched, setIsMovieWatched] = useState(false);
   const togglePassword = () => {
-    setIsMovieWatched(!isMovieWatched);
+    setIsMovieWatched(!isMovieWatched)
+    var formdata = new FormData();
+formdata.append("title", movies[selectedMovieIndex!].title);
+formdata.append("isWatched", `${isMovieWatched}`);
+
+var requestOptions = {
+  method: 'PATCH',
+  body: formdata
+};
+
+fetch("https://localhost:5001/api/Movie/addMovieAsWatched?=", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));;
   };
   const handleMovieImageClick = (index: number) => () =>
     setSelectedMovieIndex(index);
@@ -163,7 +190,7 @@ const FilmSlider: React.FC<FilmSliderProps> = ({}) => {
       <body>
         <div className="row">
           <div className="header">
-            <h3 className="title">Filmy dla smutnych</h3>
+            <h3 className="title">{username} oto twoje filmy</h3>
             <div className="progress-bar"></div>
           </div>
           <div className="container1">
