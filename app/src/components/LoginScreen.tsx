@@ -74,7 +74,7 @@ console.log("dlaBartka",usernameToSend)
         body: formdata
       };
       
-      fetch("https://localhost:5001/api/Movie/createUser", requestOptions)
+      fetch("https://localhost:5001/api/Movie/CreateUser", requestOptions)
         .then(response => response.text())
         .then(result => console.log(result))
         .catch(error => console.log('error', error));}
@@ -153,7 +153,7 @@ setDomination(findDominationEmotion)
     body: raw
   };
   
-  fetch("http://localhost:7000/ffr/recommendations", requestOptions1)
+  fetch("http://localhost:6666/ffr/recommendations", requestOptions1)
     .then(response => response.text())
     .then(result => console.log(result))
     .catch(error => console.log('error', error));
@@ -197,8 +197,12 @@ setDomination(findDominationEmotion)
         >
           Login
         </button>
+        
         <button>
           <Link to="/register">Register</Link>
+        </button>
+        <button onClick={() => handleSubmit()}>
+        <Link to="/films">Potwierdzam!</Link>
         </button>
        
       </div>
