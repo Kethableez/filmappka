@@ -35,24 +35,24 @@ services:
     ports:
       - "27000:27000"
 
-  db:
-    container_name: db
-    image: mysql:5.7
-    restart: always
-    environment:
-      MYSQL_DATABASE: 'FilmAppkaDB'
-      # So you don't have to use root, but you can if you like
-      MYSQL_USER: 'user'
-      # You can use whatever password you like
-      MYSQL_PASSWORD: 'root'
-      # Password for root access
-      MYSQL_ROOT_PASSWORD: 'root'
-    ports:
-      # <Port exposed> : < MySQL Port running inside container>
-      - '3306:3306'
-    expose:
-      # Opens port 3306 on the container
-      - '3306'
+  # db:
+  #   container_name: db
+  #   image: mysql:5.7
+  #   restart: always
+  #   environment:
+  #     MYSQL_DATABASE: 'FilmAppkaDB'
+  #     # So you don't have to use root, but you can if you like
+  #     MYSQL_USER: 'user'
+  #     # You can use whatever password you like
+  #     MYSQL_PASSWORD: 'root'
+  #     # Password for root access
+  #     MYSQL_ROOT_PASSWORD: 'root'
+  #   ports:
+  #     # <Port exposed> : < MySQL Port running inside container>
+  #     - '3306:3306'
+  #   expose:
+  #     # Opens port 3306 on the container
+  #     - '3306'
 
   ffr-api:
     container_name: ffr-api
@@ -63,6 +63,6 @@ services:
       context: ./ffr
       target: api
     expose:
-      - 6666
+      - 9000
     ports:
-      - "6666:6666"
+      - "9000:9000"

@@ -53,7 +53,7 @@ function RegistrationForm() {
   };
   console.log("file",fileImg)
   
-  fetch(`http://localhost:6666/ffr/recognise`, requestOptions)
+  fetch(`http://localhost:9000/ffr/recognise`, requestOptions)
     .then(response => response.json())
     .then(result => setUsernameToSend(result.results[0]) )
     .catch(error => console.log('error', error));}}
@@ -107,7 +107,7 @@ console.log("dlaBartka",usernameToSend)
 const findDominationEmotion = Object.keys(emotion!).reduce((a, b) => emotion![a] > emotion![b] ? a : b)
 setDomination(findDominationEmotion)
 
-        fetch(`http://localhost:6666/ffr/emotion`, requestOptions)
+        fetch(`http://localhost:9000/ffr/emotion`, requestOptions)
           .then(response => response.json())
           .then(result => setEmotion(result) )
           .catch(error => console.log('error', error));}}
