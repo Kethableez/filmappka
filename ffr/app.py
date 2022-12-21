@@ -73,6 +73,7 @@ def recommendation():
     result = recommendMovies(mood)
     return result
   except Exception as e:
+    print(e)
     return { 'message': str(e) }, 400
 
 @app.get('/ffr/health')
@@ -80,4 +81,4 @@ def healthCheck():
   return { 'message': 'up an running'}
 
 if __name__ == '__main__':
-  app.run(port=6666)
+  app.run(port=9000)

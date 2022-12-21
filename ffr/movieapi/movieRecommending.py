@@ -8,8 +8,8 @@ from sklearn.metrics.pairwise import linear_kernel
 
 
 # Database port
-localhost = "fa-api:5001"
-api_url = "https://%s/api/Movie/getMoviesBasedOnType" % localhost
+localhost = "localhost:5001"
+api_url = "https://%s/api/Movie/getMoviesBasedOnTypeAndKeywords" % localhost
 
 
 # Function that takes in movie title as input and outputs most similar movies
@@ -89,8 +89,12 @@ def recommendMovies(mood):
             ]
         }
 
-    response = requests.post(api_url, json=movies_to_mood, verify=False)
+    print(movies_to_mood)
+    print(movies_to_mood['typeIds'])
+
+    response = requests.post(api_url, json=movies_to_mood['typeIds'], verify=False)
     movie_list = response.json()
+    print(movie_list)
     pd.options.display.max_columns = None
     pd.options.display.width = None
     df2 = pd.DataFrame.from_dict(movie_list)

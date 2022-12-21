@@ -58,7 +58,7 @@ function RegistrationForm() {
   };
   console.log("file",fileImg)
   
-  fetch(`http://localhost:6666/ffr/encode`, requestOptions)
+  fetch(`http://localhost:9000/ffr/encode`, requestOptions)
     .then(response => response.text())
     .then(result => console.log(result))
     .catch(error => console.log('error', error));}}
