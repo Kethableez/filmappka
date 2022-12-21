@@ -42,11 +42,6 @@ $ docker stop ffr-api ffr-db
 | `file`    | `File`   | **Required**. Face image to encode          |
 | `label`   | `string` | **Required**. User email to label encodings |
 
-#### Headers:
-| Key   | Type     | Description            |
-| :--   | :--      | :--                    |
-| `key` | `string` | **Required**. Api key  |
-
 #### Response:
 * 200:
     ```
@@ -85,11 +80,6 @@ Ma to na celu późniejsze porównywanie zdjęcia użytkownika ze wzorcem w celu
 | :-------- | :------- | :-------------------------                  |
 | `file`    | `File`   | **Required**. Face image to encode          |
 
-#### Headers:
-| Key   | Type     | Description            |
-| :--   | :--      | :--                    |
-| `key` | `string` | **Required**. Api key  | 
-
 #### Response:
 * 200:
     ```
@@ -126,11 +116,6 @@ Ma to na celu późniejsze porównywanie zdjęcia użytkownika ze wzorcem w celu
 | :-------- | :------- | :-------------------------                  |
 | `file`    | `File`   | **Required**. Face image to encode          |
 
-#### Headers:
-| Key   | Type     | Description            |
-| :--   | :--      | :--                    |
-| `key` | `string` | **Required**. Api key  | 
-
 #### Response:
 * 200:
     ```
@@ -160,12 +145,30 @@ Ma to na celu późniejsze porównywanie zdjęcia użytkownika ze wzorcem w celu
 
 ---
 
+### Rekomendacje filmów
+
+
+```http
+  POST /ffr/emotion
+```
+
+#### Body
+  ```
+  {
+    "emotion": "string";
+  }
+  ```
+
+#### Response:
+* 200:
+    ```
+    ???        
+    ```
+
+---
+
 ### Health Check
 
 ```http
   GET /ffr/health
 ```
-
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| `api_key` | `string` | **Required**. Your API key |
