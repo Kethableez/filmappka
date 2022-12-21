@@ -72,5 +72,11 @@ namespace FA.RestApi.Controllers
                 throw new Exception("", ex);
             }
         }
+
+        [HttpPatch("updateLastKnownEmotionForUser")]
+        public void updateLastKnowEmotionForUser(int userId, string emotion)
+        {
+
+        }
     }
 }
