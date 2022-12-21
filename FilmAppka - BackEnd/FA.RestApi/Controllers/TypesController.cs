@@ -23,61 +23,6 @@ namespace FA.RestApi.Controllers
             typeService = _typeService;
         }
 
-        [HttpPatch("addLikedMovieType")]
-        public void addLikedMovieType(int userId,int typeId)
-        {
-            try
-            {
-                typeService.addLikedMovieType(userId,typeId);
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex);
-                throw new Exception("", ex);
-            }
-        }
-        [HttpPatch("addDislikedMovieType")]
-        public void addDislikedMovieType(int userId, int typeId)
-        {
-            try
-            {
-                typeService.addDislikedMovieType(userId, typeId);
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex);
-                throw new Exception("", ex);
-            }
-
-        }
-        [HttpDelete("removeLikedMovieType")]
-        public void removeLikedMovieType(int userId, int typeId)
-        {
-            try
-            {
-                typeService.removeLikedMovieType(userId, typeId);
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex);
-                throw new Exception("", ex);
-            }
-
-        }
-        [HttpDelete("removeDislikedMovieType")]
-        public void removeDislikedMovieType(int userId, int typeId)
-        {
-            try
-            {
-                typeService.removeDislikedMovieType(userId , typeId);
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex);
-                throw new Exception("", ex);
-            }
-
-        }
 
         [HttpGet("getAllMovieTypes")]
         public List<TypeInfo> getAllMovieTypes()
@@ -85,33 +30,6 @@ namespace FA.RestApi.Controllers
             try
             {
                 return typeService.getAllMovieTypes();
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex);
-                throw new Exception("", ex);
-            }
-        }
-
-        [HttpGet("getLikedMovieTypes")]
-        public List<TypeInfo> getLikedMovieTypes(int userId)
-        {
-            try
-            {
-                return typeService.getLikedMovieTypes(userId);
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex);
-                throw new Exception("", ex);
-            }
-        }
-        [HttpGet("getDislikedMovieTypes")]
-        public List<TypeInfo> getDislikedMovieTypes(int userId)
-        {
-            try
-            {
-                return typeService.getDislikedMovieTypes(userId);
             }
             catch (Exception ex)
             {
