@@ -16,7 +16,12 @@ const FilmSlider: React.FC<FilmSliderProps> = ({}) => {
     rating: number;
     description: string;
   }
-  const [usernameInfo, setUsernameInfo] = useState<string>("XYZ")
+  interface UserInfo {
+    userId: number | string;
+    dominateEmotion: string;
+    username: string
+  }
+  const [usernameInfo, setUsernameInfo] = useState<UserInfo>()
   const [userID, setUserID] = useState()
   const [movieID, setMovieID] = useState()
   const [movies1, setMovies] = useState()
@@ -30,9 +35,10 @@ var requestOptions = {
 };
 
 fetch("https://localhost:5001/api/User/getUser", requestOptions)
-  .then(response => response.text())
+  .then(response => response.json())
   .then(result => setUsernameInfo(result))
   .catch(error => console.log('error', error));
+
 
   const movies: Movie[] = [
     {
@@ -209,7 +215,7 @@ fetch("https://localhost:5001/api/Movie/addMovieAsWatched?=", requestOptions)
       <body>
         <div className="row">
           <div className="header">
-            <h3 className="title">{usernameInfo} oto twoje filmy</h3>
+            <h3 className="title"> {usernameInfo?.username} oto twoje filmy na {usernameInfo?.dominateEmotion} </h3>
             <div className="progress-bar"></div>
           </div>
           <div className="container1">
