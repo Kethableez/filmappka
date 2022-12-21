@@ -8,8 +8,9 @@ from sklearn.metrics.pairwise import linear_kernel
 
 
 # Database port
-localhost = "localhost:5001"
+localhost = "fa-api:5001"
 api_url = "https://%s/api/Movie/getMoviesBasedOnTypeAndKeywords" % localhost
+type_url = "https://%s/api/types/getAllMovieTypes" % localhost
 
 
 # Function that takes in movie title as input and outputs most similar movies
@@ -39,66 +40,65 @@ def get_recommendations(df2, indices, title, cosine_sim):
 
 
 def recommendMovies(mood):
+    types_resp = requests.get(type_url, verify=False)
+    types = types_resp.json()
+    types_dict = {item['name']:item['id'] for item in types}
 
     if mood == 'angry':
         movies_to_mood = {
             "typeIds": [
-                7
+                types_dict['Thriller']
             ]
         }
 
     elif mood == 'disgust':
         movies_to_mood = {
             "typeIds": [
-                7
+                types_dict['Thriller']
             ]
         }
 
     elif mood == 'happy':
         movies_to_mood = {
             "typeIds": [
-                1
+                types_dict['Adventure']
             ]
         }
 
     elif mood == 'fear':
         movies_to_mood = {
             "typeIds": [
-                7
+                types_dict['Thriller']
             ]
         }
 
     elif mood == 'sad':
         movies_to_mood = {
             "typeIds": [
-                2
+                types_dict['Fantasy']
             ]
         }
 
     elif mood == 'surprise':
         movies_to_mood = {
             "typeIds": [
-                1
+                types_dict['Adventure']
             ]
         }
 
     elif mood == 'neutral':
         movies_to_mood = {
             "typeIds": [
-                1
+                types_dict['Adventure']
             ]
         }
 
-    print(movies_to_mood)
-    print(movies_to_mood['typeIds'])
-
     response = requests.post(api_url, json=movies_to_mood['typeIds'], verify=False)
     movie_list = response.json()
-    print(movie_list)
     pd.options.display.max_columns = None
     pd.options.display.width = None
     df2 = pd.DataFrame.from_dict(movie_list)
-    df2.columns = ['id', 'title', 'yearOfProduction', 'rating', 'numberOfVoters', 'description', 'type']
+    df2.columns = ['id', 'title', 'yearOfProduction', 'rating', 'numberOfVoters', 'description', 'type', 'imageLink']
     # Deleting column type
     df2.drop('type', axis=1, inplace=True)
 

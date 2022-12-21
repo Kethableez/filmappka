@@ -6,6 +6,8 @@ services:
     build:
       context: ./FilmAppka - BackEnd
       dockerfile: Dockerfile
+    networks:
+      - conn
     ports:
      - "5000:5000"
      - "5001:5001"
@@ -18,6 +20,11 @@ services:
   fa-db:
     container_name: fa-db
     image: "mcr.microsoft.com/mssql/server:2022-latest"
+    volumes:
+      - ./bak/backupV2.bacpac:/tmp/backupV2.bacpac
+      - ./bak/FilmappkaDB.bak:/tmp/FilmappkaDB.bak
+    networks:
+      - conn
     ports:
       - "1433:1433"
     expose:
@@ -30,6 +37,8 @@ services:
     container_name: ffr-db
     image: mongo
     command: mongod --port 27000
+    networks:
+      - conn
     expose:
       - 27000
     ports:
@@ -62,7 +71,13 @@ services:
     build:
       context: ./ffr
       target: api
+    networks:
+      - conn
     expose:
       - 9000
     ports:
       - "9000:9000"
+
+networks:
+  conn:
+    driver: bridge
