@@ -7,8 +7,9 @@ namespace FA.Services.User
 {
     public interface IUserService
     {
-        public UserInfo getUser(string username);
-        public void createUser(string username);
-        public void updateMoviesDatabase(string rootPath);
+        UserInfo getUser(string username);
+        void createUser(string username);
+        void updateMoviesDatabase(string rootPath);
+        void saveEmotion(int userId, string emotion);
     }
 }

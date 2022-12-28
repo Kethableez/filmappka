@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DnsClient;
+using System.Data.Entity.Migrations;
 
 namespace FA.Services.User
 {
@@ -104,6 +105,17 @@ namespace FA.Services.User
 
                 }
 
+            }
+        }
+
+        public void saveEmotion(int userId,string emotion)
+        {
+            var user = faDbContext.Set<Domain.Entities.User>().Where(x => x.Id == userId).FirstOrDefault();
+            if(user !=null)
+            {
+                user.LastKnownEmotion = emotion;
+                faDbContext.Set<Domain.Entities.User>().AddOrUpdate(user);
+                faDbContext.SaveChanges();
             }
         }
     }
