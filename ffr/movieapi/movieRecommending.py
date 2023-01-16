@@ -30,11 +30,6 @@ def get_recommendations(df2, indices, title, cosine_sim):
     # Get the movie indices
     movie_indices = [i[0] for i in sim_scores]
 
-    # Deleting column id
-    df2.drop('id', axis=1, inplace=True)
-    # Placeholder for movie poster image link
-    df2['image'] = 'https://xl.movieposterdb.com/05_07/1999/0120689/xl_34970_0120689_e3f4a87d.jpg?v=2022-05-21%2016:12:26'
-
     # Return the top 9 most similar movies
     return df2.iloc[movie_indices]
 
@@ -98,9 +93,7 @@ def recommendMovies(mood):
     pd.options.display.max_columns = None
     pd.options.display.width = None
     df2 = pd.DataFrame.from_dict(movie_list)
-    df2.columns = ['id', 'title', 'yearOfProduction', 'rating', 'numberOfVoters', 'description', 'type', 'imageLink']
-    # Deleting column type
-    df2.drop('type', axis=1, inplace=True)
+    df2.columns = ['id', 'title', 'yearOfProduction', 'rating', 'numberOfVoters', 'description', 'imageLink', 'type']
 
     C = df2['rating'].mean()
     m = df2['numberOfVoters'].quantile(0.9)
@@ -112,16 +105,12 @@ def recommendMovies(mood):
         # Calculation based on the IMDB formula
         return (v / (v + m) * R) + (m / (m + v) * C)
 
-    # Placeholder for movie poster image link
-    q_movies['image'] = 'https://xl.movieposterdb.com/05_07/1999/0120689/xl_34970_0120689_e3f4a87d.jpg?v=2022-05-21%2016:12:26'
     # Define a new feature 'score' and calculate its value with `weighted_rating()`
     q_movies['score'] = q_movies.apply(weighted_rating, axis=1)
     # Sort movies based on score calculated above
     q_movies = q_movies.sort_values('score', ascending=False)
     # Print the top 9 movies
-    top_movies = q_movies[['title', 'yearOfProduction', 'rating', 'description', 'image']].head(9)
-    # Deleting column numberOfVoters
-    df2.drop('numberOfVoters', axis=1, inplace=True)
+    top_movies = q_movies[['id', 'title', 'yearOfProduction', 'rating', 'numberOfVoters', 'description', 'imageLink', 'type']].head(9)
 
     # Define a TF-IDF Vectorizer Object. Remove all english stop words such as 'the', 'a'
     tfidf = TfidfVectorizer(stop_words='english')
@@ -129,8 +118,6 @@ def recommendMovies(mood):
     df2['description'] = df2['description'].fillna('')
     # Construct the required TF-IDF matrix by fitting and transforming the data
     tfidf_matrix = tfidf.fit_transform(df2['description'])
-    # Output the shape of tfidf_matrix
-    # print(tfidf_matrix.shape)
 
     cosine_sim = linear_kernel(tfidf_matrix, tfidf_matrix)
     # Construct a reverse map of indices and movie titles
@@ -151,6 +138,6 @@ def recommendMovies(mood):
     elif mood == 'neutral':
         recommendations = top_movies
 
-    result = recommendations.to_json(orient="values")
+    result = recommendations.to_json(orient="records")
     parsed = json.loads(result)
     return json.dumps(parsed, indent=4)
