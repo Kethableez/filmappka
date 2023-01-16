@@ -8,7 +8,7 @@ RUN pip install -U pip && pip install -r requirements/requirements.txt
 
 ENV DOCKER=True
 
-COPY ./weights /root/.deepface/weights
+# COPY ./weights /root/.deepface/weights
 COPY ./faceapi /api/faceapi
 COPY ./movieapi /api/movieapi
 COPY ./utils /api/utils
