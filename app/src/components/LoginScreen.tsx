@@ -7,7 +7,15 @@ function RegistrationForm() {
   const [per, setPer] = useState(true)
   const [per1, setPer1] = useState(true)
   const [domination, setDomination] = useState<string>();
-
+//  type emotionType = {
+//   "angry": number,
+//   "disgust": number,
+//   "fear": number,
+//   "happy": number,
+//   "sad": number,
+//   "surprise": number,
+//   "neutral": number
+//  }
   const videoConstraints = {
     width: 1280,
     height: 720,
@@ -62,30 +70,22 @@ function RegistrationForm() {
 
 console.log("dlaBartka",usernameToSend)
     // sendToRecognise(imgSrc, "")
-    if(usernameToSend){    var myHeaders = new Headers();
-      myHeaders.append("Accept", "application/json;odata.metadata=minimal;odata.streaming=true");
-      
-      var formdata = new FormData();
-      formdata.append("name", usernameToSend);
-      
-      var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: formdata
-      };
-      
-      fetch("https://localhost:5001/api/Movie/createUser", requestOptions)
-        .then(response => response.text())
-        .then(result => console.log(result))
-        .catch(error => console.log('error', error));}
+    if(usernameToSend){   var requestOptions = {
+      method: 'POST'
+    };
+    
+    fetch(`https://localhost:5001/api/User/createUser?username=${usernameToSend}`, requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));}
 
         async function getEmotion(imgSrc:any, username:string|undefined){
           let fileImg: any = null
         if (imgSrc ){
           const readyFile = await dataUrlToFile(imgSrc, "fileName");
-          console.log(readyFile);
+          // console.log(readyFile);
           fileImg = readyFile
-          console.log(fileImg)
+          // console.log(fileImg)
           };
         
        if(imgSrc && per1 ){
@@ -102,9 +102,9 @@ console.log("dlaBartka",usernameToSend)
           headers: myHeaders,
           body: formdata
         };
-        console.log("file",fileImg)
+        // console.log("file",fileImg)
         
-const findDominationEmotion = Object.keys(emotion!).reduce((a, b) => emotion![a] > emotion![b] ? a : b)
+const findDominationEmotion = Object.keys(emotion!).reduce((a:string, b:string) => emotion![a] > emotion![b] ? a : b)
 setDomination(findDominationEmotion)
 
         fetch(`http://localhost:9000/ffr/emotion`, requestOptions)
@@ -141,22 +141,22 @@ setDomination(findDominationEmotion)
   //     updates['/' + newPostKey] = obj
   //     return update(ref(database), updates);
   // }
-  var myHeaders = new Headers();
-  myHeaders.append("key", "637766840968febde7076eeb");
-  myHeaders.append("Content-Type", "text/plain");
+  // var myHeaders = new Headers();
+  // myHeaders.append("key", "637766840968febde7076eeb");
+  // myHeaders.append("Content-Type", "text/plain");
   
-  var raw = `${{emotion:[`${domination}`]}}`;
+  // var raw = `${{emotion:[`${domination}`]}}`;
   
-  var requestOptions1 = {
-    method: 'POST',
-    headers: myHeaders,
-    body: raw
-  };
+  // var requestOptions1 = {
+  //   method: 'POST',
+  //   headers: myHeaders,
+  //   body: raw
+  // };
   
-  fetch("http://localhost:7000/ffr/recommendations", requestOptions1)
-    .then(response => response.text())
-    .then(result => console.log(result))
-    .catch(error => console.log('error', error));
+  // fetch("http://localhost:9000/ffr/recommendations", requestOptions1)
+  //   .then(response => response.text())
+  //   .then(result => console.log(result))
+  //   .catch(error => console.log('error', error));
   const handleSubmit = useCallback( () => {
     sendToRecognise(imgSrc, "")
     // getEmotion(imgSrc, "")
@@ -200,7 +200,9 @@ setDomination(findDominationEmotion)
         <button>
           <Link to="/register">Register</Link>
         </button>
-       
+        <button>
+          <Link to="/films">movies</Link>
+        </button>
       </div>
     </div>
   );

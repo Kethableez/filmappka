@@ -17,6 +17,44 @@ const FilmSlider: React.FC<FilmSliderProps> = ({}) => {
     description: string;
   }
   const [username, setUsername] = useState<string>("XYZ")
+  const [emotion, setEmotion] = useState<string>("neutral")
+  const [moviess, setMoviess] = useState<string>("")
+
+
+  var myHeaders = new Headers();
+  myHeaders.append("Accept", "application/json;odata.metadata=minimal;odata.streaming=true");
+  
+  var requestOptions2 = {
+    method: 'GET',
+    headers: myHeaders
+  };
+  
+  fetch("https://localhost:5001/api/User/getEmotion", requestOptions2)
+    .then(response => response.text())
+    .then(result => setEmotion(result))
+    .catch(error => console.log('error', error));
+
+
+  var myHeaders = new Headers();
+myHeaders.append("key", "637766840968febde7076eeb");
+myHeaders.append("Content-Type", "application/json");
+
+var raw = JSON.stringify({
+  "emotion": [
+    `${emotion}`
+  ]
+});
+
+var requestOptions1 = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw
+};
+
+fetch("http://localhost:9000/ffr/recommendations", requestOptions1)
+  .then(response => response.json())
+  .then(result => setMoviess(result))
+  .catch(error => console.log('error', error));
   var myHeaders = new Headers();
 myHeaders.append("Accept", "application/json;odata.metadata=minimal;odata.streaming=true");
 
@@ -242,6 +280,7 @@ fetch("https://localhost:5001/api/Movie/addMovieAsWatched?=", requestOptions)
           <button>
             <Link to="/mood"> Back </Link>
           </button>
+          
         </text>
       </button>
     </html>
