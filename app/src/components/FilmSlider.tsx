@@ -10,69 +10,89 @@ interface FilmSliderProps {}
 
 const FilmSlider: React.FC<FilmSliderProps> = ({}) => {
   interface Movie {
+      [x: string]: any;
+      id: number
+      title: string
+      yearOfProduction: number,
+      rating: number,
+      numberOfVoters: number,
+      description: string
+      imageLink: string
+      type: [
+      {
+      id: number,
+      name: string
+      },{
+        id: number,
+        name: string
+        }]
+  }
+  interface ubogieMovie {
     id: any;
-    image: string;
+    imageLink: string;
     title: string;
     rating: number;
     description: string;
   }
-  const [username, setUsername] = useState<string>("XYZ")
-  const [emotion, setEmotion] = useState<string>("neutral")
-  const [moviess, setMoviess] = useState<string>("")
+  interface userInfo {
+      id:number
+      username: string
+      lastKnownEmotion: string
+  }
+  const [username, setUsername] = useState<userInfo>({id:0,username:"XYZ",lastKnownEmotion:"neutral"})
+  
+  const [moviess, setMoviess] = useState<Movie>()
+  const [test, setTest] = useState<number>(0)
 
-
+ 
+if(username.id === 0 && username.lastKnownEmotion === "neutral" && username.username === "XYZ"){
   var myHeaders = new Headers();
   myHeaders.append("Accept", "application/json;odata.metadata=minimal;odata.streaming=true");
   
-  var requestOptions2 = {
+  var requestOptions1 = {
     method: 'GET',
     headers: myHeaders
   };
   
-  fetch("https://localhost:5001/api/User/getEmotion", requestOptions2)
-    .then(response => response.text())
-    .then(result => setEmotion(result))
+  fetch("http://localhost:5000/api/User/getUser?username=test", requestOptions1)
+    .then(response => response.json())
+    .then(result => setUsername(result))
     .catch(error => console.log('error', error));
+  }
 
 
-  var myHeaders = new Headers();
-myHeaders.append("key", "637766840968febde7076eeb");
-myHeaders.append("Content-Type", "application/json");
+    if(username && !moviess && test < 1 ) {
 
-var raw = JSON.stringify({
-  "emotion": [
-    `${emotion}`
-  ]
-});
+      var myHeaders = new Headers();
+      myHeaders.append("key", "637766840968febde7076eeb");
+      myHeaders.append("Content-Type", "application/json");
+      
+      var raw = JSON.stringify({
+        "emotion": [
+          `${username.lastKnownEmotion}`
+        ]
+      });
+      
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw
+      };
+      
+      fetch("http://localhost:9000/ffr/recommendations", requestOptions)
+        .then(response => response.json())
+        .then(result => setMoviess(result))
+        .catch(error => console.log('error', error));
+        setTest(test + 1)
+     }
+ 
+console.log("pobraneFilmy",moviess)
+  
 
-var requestOptions1 = {
-  method: 'POST',
-  headers: myHeaders,
-  body: raw
-};
-
-fetch("http://localhost:9000/ffr/recommendations", requestOptions1)
-  .then(response => response.json())
-  .then(result => setMoviess(result))
-  .catch(error => console.log('error', error));
-  var myHeaders = new Headers();
-myHeaders.append("Accept", "application/json;odata.metadata=minimal;odata.streaming=true");
-
-var requestOptions = {
-  method: 'GET',
-  headers: myHeaders
-};
-
-fetch("https://localhost:5001/api/User/getUser", requestOptions)
-  .then(response => response.text())
-  .then(result => setUsername(result))
-  .catch(error => console.log('error', error));
-
-  const movies: Movie[] = [
+  const movies: ubogieMovie[] = [
     {
       id: 0,
-      image:
-        "https://pyxis.nymag.com/v1/imgs/0a8/5d1/3139b0b2fc427ff34fe5394bd1625d8527-2019-critics-joker.rsquare.w700.jpg",
+      imageLink: "https://pyxis.nymag.com/v1/imgs/0a8/5d1/3139b0b2fc427ff34fe5394bd1625d8527-2019-critics-joker.rsquare.w700.jpg",
       title: "Joker",
       rating: 4.5,
       description:
@@ -80,7 +100,7 @@ fetch("https://localhost:5001/api/User/getUser", requestOptions)
     },
     {
       id: 1,
-      image: "https://i.postimg.cc/8zkMzLKw/godzilla-king-of-the-monsters.jpg",
+      imageLink: "https://i.postimg.cc/8zkMzLKw/godzilla-king-of-the-monsters.jpg",
       title: "Godzilla: King of the Monsters",
       rating: 3.5,
       description:
@@ -88,7 +108,7 @@ fetch("https://localhost:5001/api/User/getUser", requestOptions)
     },
     {
       id: 2,
-      image: "https://i.postimg.cc/507HkrqC/abominable.jpg",
+      imageLink: "https://i.postimg.cc/507HkrqC/abominable.jpg",
       title: "Abominable",
       rating: 4.6,
       description:
@@ -96,15 +116,15 @@ fetch("https://localhost:5001/api/User/getUser", requestOptions)
     },
     {
       id: 3,
-      image: "https://i.postimg.cc/zf6g76JP/scary-movie.jpg",
+      imageLink: "https://i.postimg.cc/zf6g76JP/scary-movie.jpg",
       title: "Scary Movie",
       rating: 3.8,
       description:
-        'Defying the very notion of good taste, Scary Movie out-parodies the pop culture parodies with a no-holds barred assault on the most popular images and talked-about moments from recent films, television and commercials. The film boldly fires barbs at the classic scenes from "Scream," "The Sixth Sense," "The Matrix," "I Know What You Did Last Summer" and "The Blair Witch Project," then goes on to mock a whole myriad of teen movie clichés, no matter the genre.',
+        'Defying the very notion of good taste, Scary Movie out-parodies the pop culture parodies with a no-holds barred assault on the most popular imageLinks and talked-about moments from recent films, television and commercials. The film boldly fires barbs at the classic scenes from "Scream," "The Sixth Sense," "The Matrix," "I Know What You Did Last Summer" and "The Blair Witch Project," then goes on to mock a whole myriad of teen movie clichés, no matter the genre.',
     },
     {
       id: 4,
-      image: "https://i.postimg.cc/qqWNpCFB/endgame.jpg",
+      imageLink: "https://i.postimg.cc/qqWNpCFB/endgame.jpg",
       title: "Avengers: Endgame",
       rating: 4.7,
       description:
@@ -112,7 +132,7 @@ fetch("https://localhost:5001/api/User/getUser", requestOptions)
     },
     {
       id: 5,
-      image: "https://i.postimg.cc/4yYKC1BF/matrix.jpg",
+      imageLink: "https://i.postimg.cc/4yYKC1BF/matrix.jpg",
       title: "The Matrix",
       rating: 4.7,
       description:
@@ -120,7 +140,7 @@ fetch("https://localhost:5001/api/User/getUser", requestOptions)
     },
     {
       id: 6,
-      image: "https://i.postimg.cc/SNzXDDXn/pulp-fiction.jpg",
+      imageLink: "https://i.postimg.cc/SNzXDDXn/pulp-fiction.jpg",
       title: "Pulp Fiction",
       rating: 4.6,
       description:
@@ -128,7 +148,7 @@ fetch("https://localhost:5001/api/User/getUser", requestOptions)
     },
     {
       id: 7,
-      image: "https://i.postimg.cc/kMH6Qk5r/rise-of-skywalker.jpg",
+      imageLink: "https://i.postimg.cc/kMH6Qk5r/rise-of-skywalker.jpg",
       title: "Star Wars: The Rise of Skywalker",
       rating: 3.5,
       description:
@@ -136,7 +156,7 @@ fetch("https://localhost:5001/api/User/getUser", requestOptions)
     },
     {
       id: 8,
-      image: "https://i.postimg.cc/YCPL3ZRL/kill-bill.jpg",
+      imageLink: "https://i.postimg.cc/YCPL3ZRL/kill-bill.jpg",
       title: "Kill Bill",
       rating: 4.4,
       description:
@@ -144,7 +164,7 @@ fetch("https://localhost:5001/api/User/getUser", requestOptions)
     },
     {
       id: 9,
-      image: "https://i.postimg.cc/CKLYRxkj/parasite.jpg",
+      imageLink: "https://i.postimg.cc/CKLYRxkj/parasite.jpg",
       title: "Parasite",
       rating: 4.5,
       description:
@@ -152,7 +172,7 @@ fetch("https://localhost:5001/api/User/getUser", requestOptions)
     },
     {
       id: 10,
-      image: "https://i.postimg.cc/cHygq3Vs/snatch.jpg",
+      imageLink: "https://i.postimg.cc/cHygq3Vs/snatch.jpg",
       title: "Snatch",
       rating: 4.8,
       description:
@@ -160,7 +180,7 @@ fetch("https://localhost:5001/api/User/getUser", requestOptions)
     },
     {
       id: 11,
-      image: "https://i.postimg.cc/25VW4rfZ/planet-of-the-apes.jpg",
+      imageLink: "https://i.postimg.cc/25VW4rfZ/planet-of-the-apes.jpg",
       title: "Planet of the Apes",
       rating: 3,
       description:
@@ -168,7 +188,7 @@ fetch("https://localhost:5001/api/User/getUser", requestOptions)
     },
     {
       id: 12,
-      image: "https://i.postimg.cc/0QY69Qs7/i-am-legend-movie-poster.jpg",
+      imageLink: "https://i.postimg.cc/0QY69Qs7/i-am-legend-movie-poster.jpg",
       title: "I Am Legend",
       rating: 4.6,
       description:
@@ -176,7 +196,7 @@ fetch("https://localhost:5001/api/User/getUser", requestOptions)
     },
     {
       id: 13,
-      image: "https://i.postimg.cc/MGjMr53P/casino-royale.jpg",
+      imageLink: "https://i.postimg.cc/MGjMr53P/casino-royale.jpg",
       title: "Casino Royale",
       rating: 4.7,
       description:
@@ -184,13 +204,17 @@ fetch("https://localhost:5001/api/User/getUser", requestOptions)
     },
     {
       id: 14,
-      image: "https://i.postimg.cc/W19rFtxV/jurassic-park.jpg",
+      imageLink: "https://i.postimg.cc/W19rFtxV/jurassic-park.jpg",
       title: "Jurassic Park",
       rating: 4.8,
       description:
         "In Steven Spielberg's massive blockbuster, paleontologists Alan Grant (Sam Neill) and Ellie Sattler (Laura Dern) and mathematician Ian Malcolm (Jeff Goldblum) are among a select group chosen to tour an island theme park populated by dinosaurs created from prehistoric DNA. While the park's mastermind, billionaire John Hammond (Richard Attenborough), assures everyone that the facility is safe, they find out otherwise when various ferocious predators break free and go on the hunt.",
     },
   ];
+  const Movies:Movie[] = [moviess!] 
+  
+  const tescik:Movie = Movies[0]
+  console.log("!!!!!doWyswietlenia",tescik)
   const back = React.useCallback(() => {}, []);
   const [selectedMovieIndex, setSelectedMovieIndex] = useState<
     number | undefined
@@ -199,7 +223,7 @@ fetch("https://localhost:5001/api/User/getUser", requestOptions)
   const togglePassword = () => {
     setIsMovieWatched(!isMovieWatched)
     var formdata = new FormData();
-formdata.append("title", movies[selectedMovieIndex!].title);
+formdata.append("title", Movies[selectedMovieIndex!].title);
 formdata.append("isWatched", `${isMovieWatched}`);
 
 var requestOptions = {
@@ -207,14 +231,14 @@ var requestOptions = {
   body: formdata
 };
 
-fetch("https://localhost:5001/api/Movie/addMovieAsWatched?=", requestOptions)
+fetch("http://localhost:5000/api/Movie/addMovieAsWatched?=", requestOptions)
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));;
   };
   const handleMovieImageClick = (index: number) => () =>
     setSelectedMovieIndex(index);
-
+if( tescik){
   return (
     <html lang="en">
       <head>
@@ -228,7 +252,7 @@ fetch("https://localhost:5001/api/Movie/addMovieAsWatched?=", requestOptions)
       <body>
         <div className="row">
           <div className="header">
-            <h3 className="title">{username} oto twoje filmy</h3>
+            <h3 className="title">{username.username} oto twoje filmy</h3>
             <div className="progress-bar"></div>
           </div>
           <div className="container1">
@@ -236,8 +260,8 @@ fetch("https://localhost:5001/api/Movie/addMovieAsWatched?=", requestOptions)
               <div className="text">&#8249;</div>
             </button>
             <div className="slider">
-              {movies.map((item, index) => (
-                <img onClick={handleMovieImageClick(index)} src={item.image} />
+              {tescik.map((item: { imageLink: string | undefined; }, index: number) => (
+                <img onClick={handleMovieImageClick(index)} src={item.imageLink === undefined ? "https://pyxis.nymag.com/v1/imgs/0a8/5d1/3139b0b2fc427ff34fe5394bd1625d8527-2019-critics-joker.rsquare.w700.jpg" :item.imageLink} />
               ))}
             </div>
             <button className="handle right-handle">
@@ -250,26 +274,26 @@ fetch("https://localhost:5001/api/Movie/addMovieAsWatched?=", requestOptions)
         <div className="movieInfo"> </div>
 
         <text className="movieTitle">
-          {!selectedMovieIndex && movies[0].title}
+          {!selectedMovieIndex && tescik[0].title}
           {selectedMovieIndex != 0 &&
             selectedMovieIndex &&
-            movies[selectedMovieIndex].title}
+            tescik[selectedMovieIndex].title}
         </text>
             
         <text className="movieRating">
-          {!selectedMovieIndex && movies[0].rating + "/ 5"}
+          {!selectedMovieIndex && tescik[0].rating + "/ 5"}
           {selectedMovieIndex != 0 &&
             selectedMovieIndex &&
-            movies[selectedMovieIndex].rating + "/ 5"}
+            tescik[selectedMovieIndex].rating + "/ 5"}
         </text>
         <button className="short" onClick={togglePassword}>
             {isMovieWatched ?  <FaEye /> :<FaEyeSlash /> }
           </button>
         <text className="MovieDescription">
-          {!selectedMovieIndex && movies[0].description}
+          {!selectedMovieIndex && tescik[0].description}
           {selectedMovieIndex != 0 &&
             selectedMovieIndex &&
-            movies[selectedMovieIndex].description}
+            tescik[selectedMovieIndex].description}
         </text>
       </div>
       <button>
@@ -284,6 +308,7 @@ fetch("https://localhost:5001/api/Movie/addMovieAsWatched?=", requestOptions)
         </text>
       </button>
     </html>
-  );
+  )}
+  else{ return <text> Jesteśmy w trakcie wczytywania twoich poleceń, prosimy o chwilę cierpliwości. Treść wkrótce się pojawi</text>}
 };
 export default FilmSlider;
