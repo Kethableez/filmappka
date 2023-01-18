@@ -136,7 +136,7 @@ namespace FA.RestApi
 
             app.UseCors("CorsPolicy");
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
@@ -181,9 +181,9 @@ namespace FA.RestApi
             //        spa.Options.SourcePath = "wwwroot";
             //        spa.Options.DefaultPageStaticFileOptions = new StaticFileOptions
             //        {
-            //            FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(),"wwwroot"))
+            //            FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot"))
             //        };
-            //        if(env.IsDevelopment())
+            //        if (env.IsDevelopment())
             //        {
             //            spa.UseProxyToSpaDevelopmentServer("http://localhost:60653");
             //        }
