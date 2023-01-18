@@ -135,12 +135,9 @@ namespace FA.RestApi
             }
 
             app.UseCors("CorsPolicy");
-
-<<<<<<< HEAD
+            
             // app.UseHttpsRedirection();
-=======
-            //app.UseHttpsRedirection();
->>>>>>> origin
+
 
             app.UseRouting();
 
