@@ -252,7 +252,7 @@ if( tescik){
       <body>
         <div className="row">
           <div className="header">
-            <h3 className="title">{username.username} oto twoje filmy</h3>
+            <h3 className="title">{username.username} there are your films, we detect the {username.lastKnownEmotion} emotion</h3>
             <div className="progress-bar"></div>
           </div>
           <div className="container1">

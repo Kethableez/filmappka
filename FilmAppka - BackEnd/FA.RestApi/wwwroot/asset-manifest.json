@@ -1,5 +1,18 @@
 {
   "files": {
+<<<<<<< HEAD
+    "main.css": "/filmappka/static/css/main.6c59c0da.css",
+    "main.js": "/filmappka/static/js/main.f37e9f25.js",
+    "static/js/787.fdbe14ba.chunk.js": "/filmappka/static/js/787.fdbe14ba.chunk.js",
+    "index.html": "/filmappka/index.html",
+    "main.6c59c0da.css.map": "/filmappka/static/css/main.6c59c0da.css.map",
+    "main.f37e9f25.js.map": "/filmappka/static/js/main.f37e9f25.js.map",
+    "787.fdbe14ba.chunk.js.map": "/filmappka/static/js/787.fdbe14ba.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6c59c0da.css",
+    "static/js/main.f37e9f25.js"
+=======
     "main.css": "/static/css/main.6c59c0da.css",
     "main.js": "/static/js/main.024c41ec.js",
     "static/js/787.fdbe14ba.chunk.js": "/static/js/787.fdbe14ba.chunk.js",
@@ -11,5 +24,6 @@
   "entrypoints": [
     "static/css/main.6c59c0da.css",
     "static/js/main.024c41ec.js"
+>>>>>>> origin
   ]
 }
