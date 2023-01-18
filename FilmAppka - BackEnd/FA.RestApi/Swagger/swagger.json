@@ -7,9 +7,7 @@
   "paths": {
     "/api/Movie/getAllMovies": {
       "get": {
-        "tags": [
-          "Movie"
-        ],
+        "tags": ["Movie"],
         "produces": [
           "application/json;odata.metadata=minimal;odata.streaming=true",
           "application/json;odata.metadata=minimal;odata.streaming=false",
@@ -41,11 +39,74 @@
         }
       }
     },
+    "/api/Movie/getMoviesBasedOnType": {
+      "post": {
+        "tags": ["Movie"],
+        "consumes": [
+          "application/json;odata.metadata=minimal;odata.streaming=true",
+          "application/json;odata.metadata=minimal;odata.streaming=false",
+          "application/json;odata.metadata=minimal",
+          "application/json;odata.metadata=full;odata.streaming=true",
+          "application/json;odata.metadata=full;odata.streaming=false",
+          "application/json;odata.metadata=full",
+          "application/json;odata.metadata=none;odata.streaming=true",
+          "application/json;odata.metadata=none;odata.streaming=false",
+          "application/json;odata.metadata=none",
+          "application/json;odata.streaming=true",
+          "application/json;odata.streaming=false",
+          "application/json",
+          "application/xml",
+          "application/prs.mock-odata",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json;odata.metadata=minimal;odata.streaming=true",
+          "application/json;odata.metadata=minimal;odata.streaming=false",
+          "application/json;odata.metadata=minimal",
+          "application/json;odata.metadata=full;odata.streaming=true",
+          "application/json;odata.metadata=full;odata.streaming=false",
+          "application/json;odata.metadata=full",
+          "application/json;odata.metadata=none;odata.streaming=true",
+          "application/json;odata.metadata=none;odata.streaming=false",
+          "application/json;odata.metadata=none",
+          "application/json;odata.streaming=true",
+          "application/json;odata.streaming=false",
+          "application/json",
+          "application/xml",
+          "application/prs.mock-odata",
+          "text/plain",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/MovieInfo"
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Movie/getWatchedMoviesForUser": {
       "get": {
-        "tags": [
-          "Movie"
-        ],
+        "tags": ["Movie"],
         "produces": [
           "application/json;odata.metadata=minimal;odata.streaming=true",
           "application/json;odata.metadata=minimal;odata.streaming=false",
@@ -87,9 +148,7 @@
     },
     "/api/Movie/addMovieAsWatched": {
       "patch": {
-        "tags": [
-          "Movie"
-        ],
+        "tags": ["Movie"],
         "parameters": [
           {
             "in": "query",
@@ -113,9 +172,7 @@
     },
     "/api/Movie/removeMovieFromWatched": {
       "delete": {
-        "tags": [
-          "Movie"
-        ],
+        "tags": ["Movie"],
         "parameters": [
           {
             "in": "query",
@@ -137,164 +194,9 @@
         }
       }
     },
-    "/api/Movie/getMovieSugestions": {
-      "get": {
-        "tags": [
-          "Movie"
-        ],
-        "produces": [
-          "application/json;odata.metadata=minimal;odata.streaming=true",
-          "application/json;odata.metadata=minimal;odata.streaming=false",
-          "application/json;odata.metadata=minimal",
-          "application/json;odata.metadata=full;odata.streaming=true",
-          "application/json;odata.metadata=full;odata.streaming=false",
-          "application/json;odata.metadata=full",
-          "application/json;odata.metadata=none;odata.streaming=true",
-          "application/json;odata.metadata=none;odata.streaming=false",
-          "application/json;odata.metadata=none",
-          "application/json;odata.streaming=true",
-          "application/json;odata.streaming=false",
-          "application/json",
-          "application/xml",
-          "application/prs.mock-odata",
-          "text/plain",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "userId",
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "in": "query",
-            "name": "mood",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/MovieInfo"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Types/addLikedMovieType": {
-      "patch": {
-        "tags": [
-          "Types"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "userId",
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "in": "query",
-            "name": "typeId",
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/api/Types/addDislikedMovieType": {
-      "patch": {
-        "tags": [
-          "Types"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "userId",
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "in": "query",
-            "name": "typeId",
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/api/Types/removeLikedMovieType": {
-      "delete": {
-        "tags": [
-          "Types"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "userId",
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "in": "query",
-            "name": "typeId",
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/api/Types/removeDislikedMovieType": {
-      "delete": {
-        "tags": [
-          "Types"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "userId",
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "in": "query",
-            "name": "typeId",
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
     "/api/Types/getAllMovieTypes": {
       "get": {
-        "tags": [
-          "Types"
-        ],
+        "tags": ["Types"],
         "produces": [
           "application/json;odata.metadata=minimal;odata.streaming=true",
           "application/json;odata.metadata=minimal;odata.streaming=false",
@@ -312,94 +214,6 @@
           "application/prs.mock-odata",
           "text/plain",
           "text/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/TypeInfo"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Types/getLikedMovieTypes": {
-      "get": {
-        "tags": [
-          "Types"
-        ],
-        "produces": [
-          "application/json;odata.metadata=minimal;odata.streaming=true",
-          "application/json;odata.metadata=minimal;odata.streaming=false",
-          "application/json;odata.metadata=minimal",
-          "application/json;odata.metadata=full;odata.streaming=true",
-          "application/json;odata.metadata=full;odata.streaming=false",
-          "application/json;odata.metadata=full",
-          "application/json;odata.metadata=none;odata.streaming=true",
-          "application/json;odata.metadata=none;odata.streaming=false",
-          "application/json;odata.metadata=none",
-          "application/json;odata.streaming=true",
-          "application/json;odata.streaming=false",
-          "application/json",
-          "application/xml",
-          "application/prs.mock-odata",
-          "text/plain",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "userId",
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/TypeInfo"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/Types/getDislikedMovieTypes": {
-      "get": {
-        "tags": [
-          "Types"
-        ],
-        "produces": [
-          "application/json;odata.metadata=minimal;odata.streaming=true",
-          "application/json;odata.metadata=minimal;odata.streaming=false",
-          "application/json;odata.metadata=minimal",
-          "application/json;odata.metadata=full;odata.streaming=true",
-          "application/json;odata.metadata=full;odata.streaming=false",
-          "application/json;odata.metadata=full",
-          "application/json;odata.metadata=none;odata.streaming=true",
-          "application/json;odata.metadata=none;odata.streaming=false",
-          "application/json;odata.metadata=none",
-          "application/json;odata.streaming=true",
-          "application/json;odata.streaming=false",
-          "application/json",
-          "application/xml",
-          "application/prs.mock-odata",
-          "text/plain",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "userId",
-            "type": "integer",
-            "format": "int32"
-          }
         ],
         "responses": {
           "200": {
@@ -416,9 +230,7 @@
     },
     "/api/User/getUser": {
       "get": {
-        "tags": [
-          "User"
-        ],
+        "tags": ["User"],
         "produces": [
           "application/json;odata.metadata=minimal;odata.streaming=true",
           "application/json;odata.metadata=minimal;odata.streaming=false",
@@ -440,9 +252,8 @@
         "parameters": [
           {
             "in": "query",
-            "name": "userId",
-            "type": "integer",
-            "format": "int32"
+            "name": "username",
+            "type": "string"
           }
         ],
         "responses": {
@@ -451,6 +262,56 @@
             "schema": {
               "$ref": "#/definitions/UserInfo"
             }
+          }
+        }
+      }
+    },
+    "/api/User/createUser": {
+      "post": {
+        "tags": ["User"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "username",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/User/updateMoviesDatabase": {
+      "put": {
+        "tags": ["User"],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/User/updateLastKnownEmotionForUser": {
+      "patch": {
+        "tags": ["User"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "userId",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "emotion",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
           }
         }
       }
@@ -480,13 +341,21 @@
           "type": "string"
         },
         "yearOfProduction": {
-          "type": "string"
+          "format": "int32",
+          "type": "integer"
         },
         "rating": {
           "format": "double",
           "type": "number"
         },
+        "numberOfVoters": {
+          "format": "int32",
+          "type": "integer"
+        },
         "description": {
+          "type": "string"
+        },
+        "imageLink": {
           "type": "string"
         },
         "type": {
@@ -504,16 +373,10 @@
           "format": "int32",
           "type": "integer"
         },
-        "firstName": {
+        "username": {
           "type": "string"
         },
-        "lastName": {
-          "type": "string"
-        },
-        "email": {
-          "type": "string"
-        },
-        "userName": {
+        "lastKnownEmotion": {
           "type": "string"
         }
       }
