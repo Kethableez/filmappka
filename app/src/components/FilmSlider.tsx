@@ -67,7 +67,7 @@ const FilmSlider: React.FC<FilmSliderProps> = ({}) => {
     };
 
     fetch(
-      "http://filmappka.azurewebsites.net/api/User/getUser?username=test",
+      "https://filmappka.azurewebsites.net/api/User/getUser?username=test",
       requestOptions1
     )
       .then((response) => response.json())
@@ -90,7 +90,10 @@ const FilmSlider: React.FC<FilmSliderProps> = ({}) => {
       body: raw,
     };
 
-    fetch("http://localhost:9000/ffr/recommendations", requestOptions)
+    fetch(
+      "https://filmappkaffr.azurewebsites.net/ffr/recommendations",
+      requestOptions
+    )
       .then((response) => response.json())
       .then((result) => setMoviess(result))
       .catch((error) => console.log("error", error));
@@ -244,7 +247,7 @@ const FilmSlider: React.FC<FilmSliderProps> = ({}) => {
     };
 
     fetch(
-      "http://filmappka.azurewebsites.net/api/Movie/addMovieAsWatched?=",
+      "https://filmappka.azurewebsites.net/api/Movie/addMovieAsWatched?=",
       requestOptions
     )
       .then((response) => response.text())

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Link } from "react-router-dom";
 import Webcam from "react-webcam";
 
@@ -53,7 +53,7 @@ function RegistrationForm() {
       };
       console.log("file", fileImg);
 
-      fetch(`http://localhost:9000/ffr/encode`, requestOptions)
+      fetch(`https://filmappkaffr.azurewebsites.net/ffr/encode`, requestOptions)
         .then((response) => response.text())
         .then((result) => console.log(result))
         .catch((error) => console.log("error", error));

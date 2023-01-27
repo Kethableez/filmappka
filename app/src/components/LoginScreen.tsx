@@ -51,7 +51,10 @@ function RegistrationForm() {
       };
       console.log("file", fileImg);
 
-      fetch(`http://localhost:9000/ffr/recognise`, requestOptions)
+      fetch(
+        `https://filmappkaffr.azurewebsites.net/ffr/recognise`,
+        requestOptions
+      )
         .then((response) => response.json())
         .then((result) => setUsernameToSend(result.results[0]))
         .catch((error) => console.log("error", error));
@@ -66,7 +69,7 @@ function RegistrationForm() {
     };
 
     fetch(
-      `http://filmappka.azurewebsites.net/api/User/createUser?username=${usernameToSend}`,
+      `https://filmappka.azurewebsites.net/api/User/createUser?username=${usernameToSend}`,
       requestOptions
     )
       .then((response) => response.text())
@@ -92,7 +95,7 @@ function RegistrationForm() {
     };
 
     fetch(
-      `http://filmappka.azurewebsites.net/api/User/updateLastKnownEmotionForUser?userId=${usernameToSend}&emotion=${domination}`,
+      `https://filmappka.azurewebsites.net/api/User/updateLastKnownEmotionForUser?userId=${usernameToSend}&emotion=${domination}`,
       requestOptions
     )
       .then((response) => response.text())
@@ -123,7 +126,10 @@ function RegistrationForm() {
       };
       // console.log("file",fileImg)
 
-      fetch(`http://localhost:9000/ffr/emotion`, requestOptions)
+      fetch(
+        `https://filmappkaffr.azurewebsites.net/ffr/emotion`,
+        requestOptions
+      )
         .then((response) => response.json())
         .then((result) => setEmotion(result))
         .catch((error) => console.log("error", error));
