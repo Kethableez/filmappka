@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/filmappka.azurewebsites.net/static/css/main.2f237677.css",
-    "main.js": "/filmappka.azurewebsites.net/static/js/main.61f80f80.js",
-    "static/js/787.fdbe14ba.chunk.js": "/filmappka.azurewebsites.net/static/js/787.fdbe14ba.chunk.js",
-    "index.html": "/filmappka.azurewebsites.net/index.html",
-    "main.2f237677.css.map": "/filmappka.azurewebsites.net/static/css/main.2f237677.css.map",
-    "main.61f80f80.js.map": "/filmappka.azurewebsites.net/static/js/main.61f80f80.js.map",
-    "787.fdbe14ba.chunk.js.map": "/filmappka.azurewebsites.net/static/js/787.fdbe14ba.chunk.js.map"
+    "main.css": "/static/css/main.2f237677.css",
+    "main.js": "/static/js/main.1246e11b.js",
+    "static/js/787.fdbe14ba.chunk.js": "/static/js/787.fdbe14ba.chunk.js",
+    "index.html": "/index.html",
+    "main.2f237677.css.map": "/static/css/main.2f237677.css.map",
+    "main.1246e11b.js.map": "/static/js/main.1246e11b.js.map",
+    "787.fdbe14ba.chunk.js.map": "/static/js/787.fdbe14ba.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.2f237677.css",
-    "static/js/main.61f80f80.js"
+    "static/js/main.1246e11b.js"
   ]
 }

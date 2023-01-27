@@ -1,7 +1,7 @@
 {
   "name": "my-ts-app",
   "version": "0.1.0",
-  "homepage": "filmappka.azurewebsites.net",
+  "homepage": "https://filmappka.azurewebsites.net",
   "private": true,
   "dependencies": {
     "@react-icons/all-files": "^4.1.0",
