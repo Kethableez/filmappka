@@ -4,7 +4,7 @@
 .container{
   display: flex;
   background-color: cadetblue;
-  color: white;
+  color: rgb(17, 16, 16);
   justify-content: center;
   justify-self: center;
   flex-direction: column;
@@ -16,7 +16,7 @@
 .userContainer{
   display: flex;
   background-color: cadetblue;
-  color: white;
+  color: rgb(10, 10, 10);
   height: auto;
   width: 100%;
   padding: 5%;

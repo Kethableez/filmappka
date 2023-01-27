@@ -10,22 +10,24 @@ interface FilmSliderProps {}
 
 const FilmSlider: React.FC<FilmSliderProps> = ({}) => {
   interface Movie {
-      [x: string]: any;
-      id: number
-      title: string
-      yearOfProduction: number,
-      rating: number,
-      numberOfVoters: number,
-      description: string
-      imageLink: string
-      type: [
+    [x: string]: any;
+    id: number;
+    title: string;
+    yearOfProduction: number;
+    rating: number;
+    numberOfVoters: number;
+    description: string;
+    imageLink: string;
+    type: [
       {
-      id: number,
-      name: string
-      },{
-        id: number,
-        name: string
-        }]
+        id: number;
+        name: string;
+      },
+      {
+        id: number;
+        name: string;
+      }
+    ];
   }
   interface ubogieMovie {
     id: any;
@@ -35,64 +37,73 @@ const FilmSlider: React.FC<FilmSliderProps> = ({}) => {
     description: string;
   }
   interface userInfo {
-      id:number
-      username: string
-      lastKnownEmotion: string
+    id: number;
+    username: string;
+    lastKnownEmotion: string;
   }
-  const [username, setUsername] = useState<userInfo>({id:0,username:"XYZ",lastKnownEmotion:"neutral"})
-  
-  const [moviess, setMoviess] = useState<Movie>()
-  const [test, setTest] = useState<number>(0)
+  const [username, setUsername] = useState<userInfo>({
+    id: 0,
+    username: "XYZ",
+    lastKnownEmotion: "neutral",
+  });
 
- 
-if(username.id === 0 && username.lastKnownEmotion === "neutral" && username.username === "XYZ"){
-  var myHeaders = new Headers();
-  myHeaders.append("Accept", "application/json;odata.metadata=minimal;odata.streaming=true");
-  
-  var requestOptions1 = {
-    method: 'GET',
-    headers: myHeaders
-  };
-  
-  fetch("http://localhost:5000/api/User/getUser?username=test", requestOptions1)
-    .then(response => response.json())
-    .then(result => setUsername(result))
-    .catch(error => console.log('error', error));
+  const [moviess, setMoviess] = useState<Movie>();
+  const [test, setTest] = useState<number>(0);
+
+  if (
+    username.id === 0 &&
+    username.lastKnownEmotion === "neutral" &&
+    username.username === "XYZ"
+  ) {
+    var myHeaders = new Headers();
+    myHeaders.append(
+      "Accept",
+      "application/json;odata.metadata=minimal;odata.streaming=true"
+    );
+
+    var requestOptions1 = {
+      method: "GET",
+      headers: myHeaders,
+    };
+
+    fetch(
+      "http://filmappka.azurewebsites.net/api/User/getUser?username=test",
+      requestOptions1
+    )
+      .then((response) => response.json())
+      .then((result) => setUsername(result))
+      .catch((error) => console.log("error", error));
   }
 
+  if (username && !moviess && test < 1) {
+    var myHeaders = new Headers();
+    myHeaders.append("key", "637766840968febde7076eeb");
+    myHeaders.append("Content-Type", "application/json");
 
-    if(username && !moviess && test < 1 ) {
+    var raw = JSON.stringify({
+      emotion: [`${username.lastKnownEmotion}`],
+    });
 
-      var myHeaders = new Headers();
-      myHeaders.append("key", "637766840968febde7076eeb");
-      myHeaders.append("Content-Type", "application/json");
-      
-      var raw = JSON.stringify({
-        "emotion": [
-          `${username.lastKnownEmotion}`
-        ]
-      });
-      
-      var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: raw
-      };
-      
-      fetch("http://localhost:9000/ffr/recommendations", requestOptions)
-        .then(response => response.json())
-        .then(result => setMoviess(result))
-        .catch(error => console.log('error', error));
-        setTest(test + 1)
-     }
- 
-console.log("pobraneFilmy",moviess)
-  
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+    };
+
+    fetch("http://localhost:9000/ffr/recommendations", requestOptions)
+      .then((response) => response.json())
+      .then((result) => setMoviess(result))
+      .catch((error) => console.log("error", error));
+    setTest(test + 1);
+  }
+
+  console.log("pobraneFilmy", moviess);
 
   const movies: ubogieMovie[] = [
     {
       id: 0,
-      imageLink: "https://pyxis.nymag.com/v1/imgs/0a8/5d1/3139b0b2fc427ff34fe5394bd1625d8527-2019-critics-joker.rsquare.w700.jpg",
+      imageLink:
+        "https://pyxis.nymag.com/v1/imgs/0a8/5d1/3139b0b2fc427ff34fe5394bd1625d8527-2019-critics-joker.rsquare.w700.jpg",
       title: "Joker",
       rating: 4.5,
       description:
@@ -100,7 +111,8 @@ console.log("pobraneFilmy",moviess)
     },
     {
       id: 1,
-      imageLink: "https://i.postimg.cc/8zkMzLKw/godzilla-king-of-the-monsters.jpg",
+      imageLink:
+        "https://i.postimg.cc/8zkMzLKw/godzilla-king-of-the-monsters.jpg",
       title: "Godzilla: King of the Monsters",
       rating: 3.5,
       description:
@@ -211,104 +223,129 @@ console.log("pobraneFilmy",moviess)
         "In Steven Spielberg's massive blockbuster, paleontologists Alan Grant (Sam Neill) and Ellie Sattler (Laura Dern) and mathematician Ian Malcolm (Jeff Goldblum) are among a select group chosen to tour an island theme park populated by dinosaurs created from prehistoric DNA. While the park's mastermind, billionaire John Hammond (Richard Attenborough), assures everyone that the facility is safe, they find out otherwise when various ferocious predators break free and go on the hunt.",
     },
   ];
-  const Movies:Movie[] = [moviess!] 
-  
-  const tescik:Movie = Movies[0]
-  console.log("!!!!!doWyswietlenia",tescik)
+  const Movies: Movie[] = [moviess!];
+
+  const tescik: Movie = Movies[0];
+  console.log("!!!!!doWyswietlenia", tescik);
   const back = React.useCallback(() => {}, []);
   const [selectedMovieIndex, setSelectedMovieIndex] = useState<
     number | undefined
   >();
   const [isMovieWatched, setIsMovieWatched] = useState(false);
   const togglePassword = () => {
-    setIsMovieWatched(!isMovieWatched)
+    setIsMovieWatched(!isMovieWatched);
     var formdata = new FormData();
-formdata.append("title", Movies[selectedMovieIndex!].title);
-formdata.append("isWatched", `${isMovieWatched}`);
+    formdata.append("title", Movies[selectedMovieIndex!].title);
+    formdata.append("isWatched", `${isMovieWatched}`);
 
-var requestOptions = {
-  method: 'PATCH',
-  body: formdata
-};
+    var requestOptions = {
+      method: "PATCH",
+      body: formdata,
+    };
 
-fetch("http://localhost:5000/api/Movie/addMovieAsWatched?=", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));;
+    fetch(
+      "http://filmappka.azurewebsites.net/api/Movie/addMovieAsWatched?=",
+      requestOptions
+    )
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
   };
   const handleMovieImageClick = (index: number) => () =>
     setSelectedMovieIndex(index);
-if( tescik){
-  return (
-    <html lang="en">
-      <head>
-        <meta charSet="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-        <link rel="stylesheet" href="styles.css" />
-        <script src="script.js" defer></script>
-      </head>
-      <body>
-        <div className="row">
-          <div className="header">
-            <h3 className="title">{username.username} there are your films, we detect the {username.lastKnownEmotion} emotion</h3>
-            <div className="progress-bar"></div>
-          </div>
-          <div className="container1">
-            <button className="handle left-handle">
-              <div className="text">&#8249;</div>
-            </button>
-            <div className="slider">
-              {tescik.map((item: { imageLink: string | undefined; }, index: number) => (
-                <img onClick={handleMovieImageClick(index)} src={item.imageLink === undefined ? "https://pyxis.nymag.com/v1/imgs/0a8/5d1/3139b0b2fc427ff34fe5394bd1625d8527-2019-critics-joker.rsquare.w700.jpg" :item.imageLink} />
-              ))}
+  if (tescik) {
+    return (
+      <html lang="en">
+        <head>
+          <meta charSet="UTF-8" />
+          <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+          />
+          <title>Document</title>
+          <link rel="stylesheet" href="styles.css" />
+          <script src="script.js" defer></script>
+        </head>
+        <body>
+          <div className="row">
+            <div className="header">
+              <h3 className="title">
+                {username.username} there are your films, we detect the{" "}
+                {username.lastKnownEmotion} emotion
+              </h3>
+              <div className="progress-bar"></div>
             </div>
-            <button className="handle right-handle">
-              <div className="text">&#8250;</div>
-            </button>
+            <div className="container1">
+              <button className="handle left-handle">
+                <div className="text">&#8249;</div>
+              </button>
+              <div className="slider">
+                {tescik.map(
+                  (item: { imageLink: string | undefined }, index: number) => (
+                    <img
+                      onClick={handleMovieImageClick(index)}
+                      src={
+                        item.imageLink === "" || undefined
+                          ? "https://pyxis.nymag.com/v1/imgs/0a8/5d1/3139b0b2fc427ff34fe5394bd1625d8527-2019-critics-joker.rsquare.w700.jpg"
+                          : item.imageLink
+                      }
+                    />
+                  )
+                )}
+              </div>
+              <button className="handle right-handle">
+                <div className="text">&#8250;</div>
+              </button>
+            </div>
           </div>
-        </div>
-      </body>
-      <div className="movies">
-        <div className="movieInfo"> </div>
+        </body>
+        <div className="movies">
+          <div className="movieInfo"> </div>
 
-        <text className="movieTitle">
-          {!selectedMovieIndex && tescik[0].title}
-          {selectedMovieIndex != 0 &&
-            selectedMovieIndex &&
-            tescik[selectedMovieIndex].title}
-        </text>
-            
-        <text className="movieRating">
-          {!selectedMovieIndex && tescik[0].rating + "/ 5"}
-          {selectedMovieIndex != 0 &&
-            selectedMovieIndex &&
-            tescik[selectedMovieIndex].rating + "/ 5"}
-        </text>
-        <button className="short" onClick={togglePassword}>
-            {isMovieWatched ?  <FaEye /> :<FaEyeSlash /> }
+          <text className="movieTitle">
+            {!selectedMovieIndex && tescik[0].title}
+            {selectedMovieIndex != 0 &&
+              selectedMovieIndex &&
+              tescik[selectedMovieIndex].title}
+          </text>
+
+          <text className="movieRating">
+            {!selectedMovieIndex && tescik[0].rating + "/ 5"}
+            {selectedMovieIndex != 0 &&
+              selectedMovieIndex &&
+              tescik[selectedMovieIndex].rating + "/ 5"}
+          </text>
+          <button className="short" onClick={togglePassword}>
+            {isMovieWatched ? <FaEye /> : <FaEyeSlash />}
           </button>
-        <text className="MovieDescription">
-          {!selectedMovieIndex && tescik[0].description}
-          {selectedMovieIndex != 0 &&
-            selectedMovieIndex &&
-            tescik[selectedMovieIndex].description}
-        </text>
-      </div>
-      <button>
-        <text onClick={back}>
-          <button>
-            <Link to="/"> Home </Link>
-          </button>
-          <button>
-            <Link to="/mood"> Back </Link>
-          </button>
-          
-        </text>
-      </button>
-    </html>
-  )}
-  else{ return <text> Jesteśmy w trakcie wczytywania twoich poleceń, prosimy o chwilę cierpliwości. Treść wkrótce się pojawi</text>}
+          <text className="MovieDescription">
+            {!selectedMovieIndex && tescik[0].description}
+            {selectedMovieIndex != 0 &&
+              selectedMovieIndex &&
+              tescik[selectedMovieIndex].description}
+          </text>
+        </div>
+        <button>
+          <text onClick={back}>
+            <button>
+              <Link to="/"> Home </Link>
+            </button>
+            <button>
+              <Link to="/mood"> Back </Link>
+            </button>
+          </text>
+        </button>
+      </html>
+    );
+  } else {
+    return (
+      <text>
+        {" "}
+        Jesteśmy w trakcie wczytywania twoich poleceń, prosimy o chwilę
+        cierpliwości. Treść wkrótce się pojawi
+      </text>
+    );
+  }
 };
 export default FilmSlider;
